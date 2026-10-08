@@ -407,7 +407,7 @@ The DFDs are divided into multiple diagrams to keep them readable.
 
 ---
 
-# 📁 Repository Structure
+# Repository Structure
 
 ```text
 
@@ -493,7 +493,7 @@ MediBridge/
 
 ---
 
-# 🔄 Core Patient Workflow
+# Core Patient Workflow
 
 ```text
 
@@ -537,7 +537,7 @@ Appointment  Doctor       Loan/ML      Health Info
 
 ---
 
-# 👨‍⚕️ Doctor Workflow
+# Doctor Workflow
 
 ```text
 
@@ -587,7 +587,7 @@ Access Log
 
 ---
 
-# 📌 Project Scope
+# Project Scope
 
 ### Current Core Scope
 
@@ -633,7 +633,7 @@ The project proposal identifies future expansion through:
 
 ---
 
-# 🧪 Evaluation Criteria
+# Evaluation Criteria
 
 The project can be evaluated using:
 
@@ -647,7 +647,7 @@ The project can be evaluated using:
 
 ---
 
-# 🔒 Risk Considerations
+# Risk Considerations
 
 | Risk | Mitigation |
 |---|---|
@@ -659,7 +659,7 @@ The project can be evaluated using:
 
 ---
 
-# 🚀 Development Approach
+# Development Approach
 
 MediBridge follows an **incremental MVP-first approach**:
 
@@ -719,7 +719,7 @@ Documentation
 
 ---
 
-## 📚 Documentation
+## Documentation
 
 | Document | Location |
 |---|---|
@@ -733,7 +733,7 @@ Documentation
 
 ---
 
-## 📄 Status
+## Status
 
 **Project:** MediBridge
 
