@@ -257,7 +257,6 @@ Shows the main patient workflow from registration/login through the major MediBr
 
 ![MediBridge Activity Diagram](docs/diagrams/activity_diagram/activity_diagram.png)
 
-> ******Placeholder:****** Add `activity.png` to the folder above if it is not present yet.
 
 ---
 
@@ -269,7 +268,6 @@ Shows the major interactions between the Patient, Doctor and MediBridge system.
 
 ![MediBridge Use Case Diagram](docs/diagrams/use_case_diagram/use_case_diagram.png)
 
-> ******Placeholder:****** Add `use_case_diagram.png` to the folder above if it is not present yet.
 
 ---
 
