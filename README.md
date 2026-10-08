@@ -279,7 +279,6 @@ Shows the main entities and relationships used by the MediBridge database.
 
 ![MediBridge ER Diagram](docs/diagrams/er_diagram/er.png)
 
-> ******Placeholder:****** Add `er.png` to the folder above if it is not present yet.
 
 ### Main Entities
 
@@ -321,7 +320,6 @@ The DFDs are divided into multiple diagrams to keep them readable.
 
 ![DFD Level 0](docs/diagrams/data_flow_diagram/level0.png)
 
-> ******Placeholder:****** Add `dfd_level_0.png` when the diagram is ready.
 
 ---
 
@@ -331,7 +329,6 @@ The DFDs are divided into multiple diagrams to keep them readable.
 
 ![DFD Level 1 - Authentication and Healthcare](docs/diagrams/data_flow_diagram/level1_patient_services.png)
 
-> ******Placeholder:****** Add `dfd_level_1_auth_healthcare.png` when the diagram is ready.
 
 ---
 
@@ -341,7 +338,6 @@ The DFDs are divided into multiple diagrams to keep them readable.
 
 ![DFD Level 1 - Medical Records](docs/diagrams/data_flow_diagram/level1_medical_records.png)
 
-> ******Placeholder:****** Add `dfd_level_1_medical_records.png` when the diagram is ready.
 
 ---
 
@@ -351,7 +347,6 @@ The DFDs are divided into multiple diagrams to keep them readable.
 
 ![DFD Level 1 - Financial Assistance](docs/diagrams/data_flow_diagram/level1_finantial_assistance.png)
 
-> ******Placeholder:****** Add `dfd_level_1_financial.png` when the diagram is ready.
 
 ---
 
@@ -361,7 +356,6 @@ The DFDs are divided into multiple diagrams to keep them readable.
 
 ![DFD Level 2 - Authentication](docs/diagrams/data_flow_diagram/level2_authentication.png)
 
-> ******Placeholder:****** Add `dfd_level_2_auth_profile.png` when the diagram is ready.
 
 ---
 
@@ -371,7 +365,6 @@ The DFDs are divided into multiple diagrams to keep them readable.
 
 ![DFD Level 2 - Hospital and Appointment](docs/diagrams/data_flow_diagram/level2_appointment.png)
 
-> ******Placeholder:****** Add `dfd_level_2_hospital_appointment.png` when the diagram is ready.
 
 ---
 
@@ -381,7 +374,6 @@ The DFDs are divided into multiple diagrams to keep them readable.
 
 ![DFD Level 2 - Medical Records and Access](docs/diagrams/data_flow_diagram/level2_medical_records.png)
 
-> ******Placeholder:****** Add `dfd_level_2_medical_records.png` when the diagram is ready.
 
 ---
 
@@ -391,7 +383,6 @@ The DFDs are divided into multiple diagrams to keep them readable.
 
 ![DFD Level 2 - Financial and ML](docs/diagrams/data_flow_diagram/level2_ml_model.png)
 
-> ******Placeholder:****** Add `dfd_level_2_financial_ml.png` when the diagram is ready.
 
 ---
 
@@ -401,7 +392,6 @@ The DFDs are divided into multiple diagrams to keep them readable.
 
 ![DFD Level 2 - Fundraising](docs/diagrams/data_flow_diagram/level2_fundraising.png)
 
-> ******Placeholder:****** Add `dfd_level_2_fundraising.png` when the diagram is ready.
 
 ---
 
@@ -739,4 +729,3 @@ Documentation
 
 **Team Members:** Suryansh Pahuja & Kunal Motwani
 
-> ER and Use Case image placeholders are intentionally kept because those two folders are currently empty except for `.gitkeep`.
