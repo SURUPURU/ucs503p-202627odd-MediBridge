@@ -1,0 +1,234 @@
+\documentclass[12pt,a4paper]{article}
+
+% ============================================================
+% MediBridge Project Proposal
+% Recreated in LaTeX from the supplied PDF
+% ============================================================
+
+\usepackage[a4paper,margin=1in]{geometry}
+\usepackage{mathptmx}
+\usepackage{setspace}
+\usepackage{enumitem}
+\usepackage{titlesec}
+\usepackage{parskip}
+\usepackage[hidelinks]{hyperref}
+
+% Match the compact report appearance
+\setstretch{1.08}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{0.65em}
+
+\setlist[itemize]{
+    leftmargin=1.5em,
+    itemsep=0.35em,
+    topsep=0.25em
+}
+
+\setlist[enumerate]{
+    leftmargin=1.8em,
+    itemsep=0.35em,
+    topsep=0.25em
+}
+
+% Section numbering/spacing
+\titleformat{\section}
+  {\normalfont\Large\bfseries}
+  {\thesection}
+  {0.65em}
+  {}
+
+\titleformat{\subsection}
+  {\normalfont\large\bfseries}
+  {\thesubsection}
+  {0.55em}
+  {}
+
+\titlespacing*{\section}{0pt}{1.0em}{0.45em}
+\titlespacing*{\subsection}{0pt}{0.7em}{0.3em}
+
+% ============================================================
+
+\begin{document}
+
+% ------------------------- TITLE PAGE -------------------------
+
+\begin{center}
+
+\vspace*{0.15cm}
+
+{\LARGE\bfseries MediBridge: Healthcare Access and Financial Assistance Platform}
+
+\vspace{1.15cm}
+
+{\large\bfseries KUNAL MOTWANI}
+
+\vspace{0.08cm}
+
+{\large 1024160137}
+
+\vspace{0.35cm}
+
+{\large\bfseries SURYANSH PAHUJA}
+
+\vspace{0.08cm}
+
+{\large 1024160058}
+
+\vspace{0.65cm}
+
+{\large August 21, 2026}
+
+\end{center}
+
+\vspace{0.7cm}
+
+% ------------------------- CONTENT ----------------------------
+
+\section{Higher-order Goal}
+
+Healthcare accessibility remains a major challenge due to fragmented
+information, expensive treatment options, and difficulty in arranging
+financial support. This project aims to build MediBridge, a software
+platform that connects healthcare discovery and financial assistance into
+a unified ecosystem.
+
+The engineering objective is to design a scalable web platform where
+patients can discover hospitals, manage medical information, understand
+treatment options, and access financial support workflows. The system
+focuses on improving decision-making and reducing delays during critical
+healthcare situations.
+
+\section{Time-to-value}
+
+The project follows an MVP-first development strategy:
+
+\begin{itemize}
+    \item First iteration delivers patient registration, healthcare
+    profiles, and hospital discovery.
+    \item Subsequent iterations introduce medical record management and
+    financial assistance workflows.
+    \item Continuous testing and user feedback guide feature improvements.
+\end{itemize}
+
+\section{Problem Statement}
+
+Patients often face difficulty finding affordable healthcare services.
+Information about hospitals, treatment costs, doctor availability, and
+financial assistance is usually distributed across multiple platforms.
+
+Existing healthcare systems frequently focus on individual services
+rather than providing a complete patient journey. Patients may struggle
+with maintaining medical records, comparing options, and arranging funds
+for treatment.
+
+This project addresses the gap by developing a centralized healthcare
+assistance platform combining medical information access and financial
+support mechanisms.
+
+\section{Proposed Solution}
+
+\subsection{Overview}
+
+MediBridge provides:
+
+\begin{itemize}
+    \item Patient dashboard.
+    \item Hospital and doctor search.
+    \item Medical record storage.
+    \item Treatment cost comparison.
+    \item Loan and fundraising assistance workflows.
+    \item Emergency health profile.
+\end{itemize}
+
+\subsection{Core Workflow}
+
+\begin{enumerate}
+    \item Patient creates a secure profile.
+    \item User searches treatment options and hospitals.
+    \item Medical records are uploaded and managed.
+    \item Financial assistance requests can be initiated.
+    \item Emergency information can be accessed when required.
+\end{enumerate}
+
+\section{Solution Approach}
+
+\subsection{System Architecture}
+
+The platform follows a three-tier architecture:
+
+\begin{itemize}
+    \item \textbf{Frontend:} Responsive patient and administrator
+    interfaces.
+    \item \textbf{Backend:} REST APIs for authentication, workflows,
+    and business logic.
+    \item \textbf{Database:} Stores users, hospitals, records, and
+    application history.
+\end{itemize}
+
+\subsection{Security Approach}
+
+The system will implement authentication, authorization, secure
+document handling, and privacy-aware data storage.
+
+\subsection{CI/CD and Testing}
+
+Automated testing and deployment pipelines will enable reliable
+incremental development.
+
+\section{Evaluation Criterion}
+
+The system will be evaluated using:
+
+\begin{itemize}
+    \item Patient workflow completion time.
+    \item Recommendation usefulness.
+    \item Document access reliability.
+    \item User satisfaction scores.
+    \item System availability.
+\end{itemize}
+
+\section{Scalability}
+
+The architecture supports future growth through modular services, cloud
+deployment, database indexing, and API-based integrations with hospitals
+and financial organizations.
+
+\section{Engine Availability Heuristic}
+
+The project can be implemented using mature web frameworks, cloud
+databases, authentication systems, storage services, testing tools, and
+deployment platforms.
+
+\section{Project Scope and Deliverables}
+
+\subsection{Initial Deliverable}
+
+\begin{itemize}
+    \item Authentication system.
+    \item Patient dashboard.
+    \item Hospital search.
+    \item Medical profile management.
+\end{itemize}
+
+\subsection{Subsequent Deliverables}
+
+\begin{itemize}
+    \item Financial assistance workflow.
+    \item Recommendation engine.
+    \item Notification system.
+    \item Partner integrations.
+\end{itemize}
+
+\section{Risks and Mitigations}
+
+Major risks include healthcare data privacy, large scope, and dependency
+on external healthcare information. These will be handled through
+limited MVP scope, secure storage practices, and modular development.
+
+\section{Summary}
+
+MediBridge proposes a scalable healthcare support platform that combines
+healthcare discovery and financial assistance into a single
+patient-focused solution.
+
+\end{document}
