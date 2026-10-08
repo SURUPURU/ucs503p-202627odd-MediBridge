@@ -1,0 +1,817 @@
+\documentclass{tietreport}
+
+% Import images
+\usepackage{graphicx}
+
+% Bibliography configuration
+\usepackage[
+  date=year,
+  style=alphabetic,
+  backend=biber,
+  sorting=nty,
+  maxnames=5,
+  minnames=3,
+  maxalphanames=4,
+  minalphanames=3,
+  backref=true,
+  doi=false,
+  isbn=false,
+  url=false,
+  eprint=false
+]{biblatex}
+\addbibresource{references.bib}
+
+%% ==================================================
+%% PROJECT INFORMATION
+%% ==================================================
+
+% Course/Lab header
+\TitlePageHeader{%
+  UCS503P - Project%
+}
+
+% Main project title
+\ProjectTitle{%
+  MediBridge
+}
+
+% Subtitle or project description
+\ProjectSubTitle{%
+  Healthcare Access and Financial Assistance Platform
+}
+
+% Student information
+\author{%
+  \texttt{1024160137} Kunal Motwani \\
+  \texttt{1024160058} Suryansh Pahuja%
+}
+
+% Group number, degree, year, program
+\TitlePageSubText{%
+  Group: MediBridge, BE Third Year, CSE%
+}
+
+% Faculty advisor/guide name
+\AdvisorName{%
+  Dr. Sandeep Kaur%
+}
+
+% Evaluation period and department info
+\TitlePageFooterText{{%
+    \large Mid-Semester Evaluation \\[0.2cm]
+    \bfseries Computer Science and Engineering
+    Department%
+  } \\[0.15cm]
+  Thapar Institute of Engineering and Technology,
+  Patiala%
+}
+
+%% ==================================================
+
+\begin{document}
+
+% Generate title page
+\maketitle
+
+% Table of contents
+\tableofcontents
+
+% ==================================================
+% CHAPTER 1
+% ==================================================
+
+\chapter{Introduction}
+
+\section{Background and Context}
+
+Healthcare information is often fragmented across hospitals, doctors,
+medical documents, and financial service providers. Patients may have
+difficulty discovering suitable healthcare facilities, maintaining a
+continuous record of their medical history, understanding treatment
+costs, and arranging financial assistance when treatment becomes
+expensive.
+
+MediBridge was proposed as a centralized, patient-focused platform that
+combines healthcare discovery, medical information management, and
+financial assistance into a unified web application. The original
+proposal identifies the core engineering objective as improving
+healthcare accessibility, reducing delays, and supporting better
+decision-making by bringing these workflows together.
+
+The proposed system follows an MVP-first development approach. The
+initial focus was placed on patient registration, healthcare profiles,
+hospital discovery, medical record management, and progressively
+extending the platform towards doctor interaction, financial assistance,
+and emergency access.
+
+\subsection{Problem Statement}
+
+Patients commonly encounter the following difficulties:
+
+\begin{itemize}
+  \item Healthcare information about hospitals, doctors, treatment
+    options, and costs is distributed across multiple sources.
+  \item Medical records may be maintained separately by different
+    hospitals, making continuity of care difficult.
+  \item Patients may have limited visibility into who has accessed their
+    medical information.
+  \item Treatment costs can create a financial barrier even when
+    suitable healthcare services are available.
+  \item In emergencies, critical information such as blood group,
+    allergies, medications, and emergency contacts may not be immediately
+    accessible.
+\end{itemize}
+
+The project therefore aims to provide a single platform through which a
+patient can manage health information, discover hospitals and doctors,
+interact with healthcare providers, and access financial and emergency
+support.
+
+\section{Project Objectives}
+
+The major objectives of the project, derived from the original proposal
+and refined according to the implementation completed by the
+mid-semester stage, are:
+
+\begin{enumerate}
+  \item \textbf{Develop a secure healthcare identity and authentication
+  system:} provide patient and doctor registration, login, role-based
+  access, password hashing, token-based authentication, and automatic
+  generation of a unique MediBridge Health ID for patients.
+
+  \item \textbf{Develop centralized medical information management:}
+  allow patients to maintain profiles, store medical records, and
+  access structured prescriptions while allowing authorized doctors to
+  interact with patient information.
+
+  \item \textbf{Implement healthcare discovery and appointment
+  workflows:} provide hospital search, hospital details, doctor
+  information, filtering, and appointment-request functionality.
+
+  \item \textbf{Provide privacy-aware doctor access:} implement
+  patient-controlled access through a PIN-based mechanism, temporary
+  access sessions, access logs, and session revocation.
+
+  \item \textbf{Integrate financial assistance workflows:} implement
+  loan application storage, rule-based eligibility evaluation, and an
+  external ML-model API interface for loan prediction.
+
+  \item \textbf{Provide an emergency health-access mechanism:} store a
+  limited emergency profile and expose an emergency-facing route that
+  can be associated with a patient's Health ID and NFC-based workflow.
+\end{enumerate}
+
+% ==================================================
+% CHAPTER 2
+% ==================================================
+
+\chapter{Methodology and Design}
+
+\section{System Architecture}
+
+The implemented MediBridge system follows the three-tier architecture
+proposed in the project proposal, consisting of a React frontend,
+Node.js/Express backend, and MongoDB-based persistence layer. An
+additional Python Flask service is used for the financial prediction
+component.
+
+\subsection{High-Level Design}
+
+The system is organized into the following major components:
+
+\begin{enumerate}
+  \item \textbf{Frontend:} a React single-page application built with
+    Vite. The frontend provides separate patient and doctor workflows,
+    protected routes, role-based navigation, profile management,
+    healthcare discovery, record management, appointments, and financial
+    application interfaces.
+
+  \item \textbf{Backend API:} a Node.js and Express.js REST API that
+    provides authentication, profile management, hospital search,
+    medical-record operations, prescriptions, doctor access, financial
+    services, fundraisers, emergency profiles, and appointment
+    operations.
+
+  \item \textbf{Database:} MongoDB accessed through Mongoose. The
+    database uses dedicated models for users, hospitals, doctors,
+    medical records, prescriptions, access sessions, access logs,
+    emergency profiles, loan applications, fundraisers, donations, and
+    appointments.
+
+  \item \textbf{ML Service:} a separate Python Flask application
+    exposes a \texttt{/predict} endpoint for loan prediction. The main
+    backend communicates with this service through HTTP.
+
+  \item \textbf{Cloud file storage:} uploaded profile and medical
+    documents are integrated with Cloudinary through the backend.
+\end{enumerate}
+
+The overall design therefore preserves the proposal's separation between
+presentation, business logic, and persistence while adding a separate
+service boundary for the financial prediction component.
+
+\subsection{Technical Stack}
+
+\begin{itemize}
+  \item \textbf{Frontend:} React 19, Vite, React Router, Zustand
+  \item \textbf{Styling/UI:} Tailwind CSS and custom CSS
+  \item \textbf{Backend:} Node.js and Express.js
+  \item \textbf{Database:} MongoDB with Mongoose ODM
+  \item \textbf{Authentication:} JWT, refresh tokens, bcryptjs
+  \item \textbf{Validation:} Joi
+  \item \textbf{Security middleware:} Helmet and express-rate-limit
+  \item \textbf{File uploads:} Multer and Cloudinary
+  \item \textbf{Frontend utilities:} Axios, React Hot Toast,
+    Lucide React, QRCode React
+  \item \textbf{ML service:} Python, Flask, Flask-CORS
+  \item \textbf{Development/build tools:} Vite, npm and Oxlint
+\end{itemize}
+
+\section{Implementation Details}
+
+\subsection{Authentication and Health ID Module}
+
+The authentication module was implemented for both patients and doctors.
+Patient registration stores the user's personal information and access
+PIN, whereas doctor registration additionally stores specialization,
+qualification, license number, experience, and optional hospital
+association.
+
+Passwords and patient access PINs are stored using bcrypt hashing.
+Authentication uses JWT-based access tokens and refresh tokens. The
+backend also applies rate limiting to authentication endpoints.
+
+Each patient automatically receives a unique Health ID in the form
+
+\[
+\texttt{MB-YYYY-XXXXXX}
+\]
+
+during user creation. The Health ID is used throughout the platform to
+identify patients and supports the doctor-access and emergency-access
+workflows.
+
+\subsection{Role-Based Access and Protected Routes}
+
+The frontend contains dedicated route guards for authenticated users and
+for role-based access. Patient and doctor pages are therefore separated
+into protected workflows.
+
+The backend similarly associates users with roles such as
+\texttt{patient}, \texttt{doctor}, and \texttt{admin}. This provides a
+foundation for limiting access to sensitive healthcare operations.
+
+\subsection{Patient Profile and Emergency Profile}
+
+The profile module supports retrieval and modification of patient
+information including name, phone number, date of birth, gender, and
+address. Profile image upload is supported through Cloudinary.
+
+A separate emergency profile is maintained for information such as:
+
+\begin{itemize}
+  \item Blood group
+  \item Allergies
+  \item Chronic conditions
+  \item Current medications
+  \item Emergency contacts
+  \item Insurance information
+  \item Organ-donor status
+  \item Additional emergency notes
+\end{itemize}
+
+The emergency profile is intentionally separated from the full medical
+record so that an emergency-access workflow can expose a restricted
+subset of information.
+
+\subsection{Hospital and Doctor Discovery}
+
+The healthcare discovery module implements hospital search with support
+for:
+
+\begin{itemize}
+  \item Search by hospital name and related text fields
+  \item City and state filtering
+  \item Hospital type filtering
+  \item Specialization filtering
+  \item Emergency-availability filtering
+  \item Minimum-rating filtering
+  \item Pagination and sorting
+\end{itemize}
+
+Hospital records contain specializations, address information, ratings,
+bed information, emergency availability, insurance information, and
+verification state.
+
+Hospital details additionally expose associated doctors. The doctor
+model stores specialization, qualifications, experience, consultation
+fee, availability, rating, and hospital association.
+
+\subsection{Appointment Module}
+
+The implementation extends the initial proposal with an appointment
+workflow. Patients can submit appointments against a hospital by
+providing:
+
+\begin{itemize}
+  \item Preferred date
+  \item Specialist
+  \item Preferred time period
+\end{itemize}
+
+Appointments initially enter a pending state. Doctor-side endpoints
+support viewing appointments associated with the doctor's hospital and
+updating appointment status to booked, rejected, or completed.
+
+\subsection{Medical Records Module}
+
+The medical-record subsystem provides centralized record storage for
+patients.
+
+Each record may contain:
+
+\begin{itemize}
+  \item Title and category
+  \item Description and clinical notes
+  \item Diagnosis
+  \item Vital signs
+  \item Hospital and doctor information
+  \item Record date
+  \item Tags
+  \item Uploaded document metadata
+\end{itemize}
+
+Records may be uploaded by the patient, by a doctor, or imported through
+the implemented mock hospital-fetch workflow.
+
+Medical documents can be uploaded through Multer and stored using
+Cloudinary. The backend provides record retrieval, filtering,
+pagination, update, and deletion operations.
+
+\subsection{Doctor Access and Consent Module}
+
+A major implementation of the proposal's privacy objective is the
+patient-controlled doctor-access mechanism.
+
+A doctor first searches for the patient using the Health ID. The patient
+then authorizes access using the four-digit access PIN.
+
+On successful verification:
+
+\begin{itemize}
+  \item A doctor-patient access session is created.
+  \item The session is valid for 24 hours.
+  \item The access event is recorded in an audit log.
+  \item The session contains permissions for records, prescriptions,
+    emergency information, and creation of medical information.
+\end{itemize}
+
+Patients can inspect their active access sessions and revoke a session
+before expiry. Access-log records therefore provide a history of access
+grants and revocations.
+
+The database also defines an expiry index on access sessions, allowing
+temporary access to be represented as time-bounded rather than
+permanent authorization.
+
+\subsection{Prescription Module}
+
+The prescription module stores prescriptions as structured records
+rather than relying solely on uploaded documents.
+
+A prescription can contain:
+
+\begin{itemize}
+  \item Diagnosis
+  \item Symptoms
+  \item Medicines
+  \item Dosage and frequency
+  \item Duration and timing
+  \item Required tests
+  \item Medical advice
+  \item Follow-up date
+  \item Relevant vitals
+\end{itemize}
+
+Doctors can create prescriptions for authorized patients, while patients
+can retrieve their prescriptions and distinguish active prescriptions
+from completed ones.
+
+\subsection{Financial Assistance Module}
+
+The financial-assistance subsystem implements the core proposal idea of
+connecting healthcare costs with financial support.
+
+A loan application stores treatment type, estimated treatment cost,
+requested amount, income, existing EMIs, employment type, credit
+history, tenure, and the resulting financial evaluation fields.
+
+The implementation currently uses two complementary mechanisms.
+
+\subsubsection{Rule-Based Eligibility}
+
+A deterministic scoring function evaluates the application using factors
+such as:
+
+\begin{itemize}
+  \item Requested amount relative to monthly income
+  \item Debt-to-income condition
+  \item Employment type
+  \item Credit history
+  \item A fixed age contribution in the current implementation
+\end{itemize}
+
+The rule score is accumulated using weighted criteria and is also used
+for EMI calculation.
+
+\subsubsection{ML Prediction Service}
+
+A separate Flask service exposes a \texttt{/predict} API endpoint.
+The backend sends application features to this service through Axios.
+
+The current repository implementation uses the service as an MVP
+prediction component. It computes a prediction score from income,
+credit-history information, and loan amount and returns an approval
+decision, score, maximum loan amount, interest-rate information, and a
+reason.
+
+The backend combines the ML response with the rule-based score to obtain
+a demonstration-level final decision of approved, partial, or rejected.
+
+This modular design allows the current prediction component to be
+replaced by a trained model later without redesigning the main
+healthcare backend.
+
+\subsection{Fundraising Module}
+
+The implementation also contains the proposed funding-gap workflow.
+
+A patient can create a fundraising campaign containing:
+
+\begin{itemize}
+  \item Campaign title and story
+  \item Total treatment requirement
+  \item Loan-approved amount
+  \item Funding gap
+  \item Treatment and hospital information
+  \item Supporting medical proof
+  \item Campaign deadline
+\end{itemize}
+
+Donations are stored against campaigns and the amount raised and
+remaining funding gap are updated accordingly.
+
+The current implementation represents the payment operation as a
+completed donation within the MVP rather than implementing a production
+payment gateway. This leaves payment integration as a future
+enhancement.
+
+\subsection{Emergency and NFC-Oriented Workflow}
+
+The application contains a public emergency route associated with a
+patient's Health ID. The intended workflow is for an NFC card/tag to
+encode an emergency-profile URL.
+
+The architecture document specifies NFC write/read operations through
+the Web NFC API and a public emergency page that exposes limited
+information without login. The emergency information is intentionally
+restricted and does not include complete medical records, prescriptions,
+financial information, or the patient's full personal address.
+
+\section{Current Implementation Status}
+
+The repository at the mid-semester stage contains a functioning
+full-stack application structure with significant portions of the
+planned MVP implemented.
+
+The implemented scope currently includes:
+
+\begin{itemize}
+  \item Patient and doctor registration
+  \item Login and token-based authentication
+  \item Automatic Health ID generation
+  \item Patient profile management
+  \item Emergency profile management
+  \item Health ID page
+  \item Hospital discovery and filtering
+  \item Hospital detail pages
+  \item Appointment creation and status handling
+  \item Medical-record upload and management
+  \item Doctor patient search
+  \item Temporary PIN-based doctor access
+  \item Access auditing and session revocation
+  \item Structured prescriptions on the backend
+  \item Loan application and eligibility workflow
+  \item ML-service API integration
+  \item Fundraiser and donation backend workflows
+  \item Emergency public-access route
+\end{itemize}
+
+Some frontend routes are still represented by placeholder pages. In
+particular, portions of the prescription, access-log, financial-result,
+financial-history, fundraiser-management, and some doctor workflows
+remain to be integrated fully into the UI.
+
+% ==================================================
+% CHAPTER 3
+% ==================================================
+
+\chapter{Results and Evaluation}
+
+\section{Testing Methodology}
+
+At the present stage, testing has focused primarily on verifying that
+the implemented frontend, backend, database models, and service
+interfaces work together correctly.
+
+\subsection{Functional Testing}
+
+The functional testing focus includes:
+
+\begin{itemize}
+  \item Patient registration followed by login
+  \item Doctor registration followed by login
+  \item Protected access to patient and doctor routes
+  \item Patient profile retrieval and update
+  \item Health ID generation and retrieval
+  \item Hospital search and filtering
+  \item Appointment creation and retrieval
+  \item Medical-record creation and retrieval
+  \item Doctor search for a patient by Health ID
+  \item PIN verification and creation of a temporary access session
+  \item Session revocation
+  \item Prescription creation through doctor-side backend endpoints
+  \item Financial eligibility evaluation
+  \item Communication with the separate prediction API
+  \item Fundraiser creation and donation updates
+\end{itemize}
+
+\subsection{Security-Oriented Testing}
+
+Security-related implementation checks include:
+
+\begin{itemize}
+  \item Password hashing using bcrypt
+  \item Access-PIN hashing using bcrypt
+  \item JWT authentication
+  \item Refresh-token validation
+  \item Protected backend routes
+  \item Role-based frontend route guards
+  \item Rate limiting on authentication endpoints
+  \item Helmet security middleware
+  \item Validation through Joi schemas
+  \item Restriction of patient-record queries to the authenticated
+    patient or authorized doctor workflow
+\end{itemize}
+
+\subsection{Integration Testing}
+
+Integration testing at this stage centers on communication between:
+
+\begin{itemize}
+  \item React frontend and Express REST API
+  \item Express backend and MongoDB through Mongoose
+  \item Express backend and Cloudinary
+  \item Express backend and the Flask prediction service
+\end{itemize}
+
+\section{Performance Metrics}
+
+The original project proposal defines evaluation criteria such as
+patient workflow completion time, recommendation usefulness, document
+access reliability, user satisfaction, and system availability.
+
+At the mid-semester stage, the repository does not contain sufficient
+measured experimental data to claim final numerical performance
+targets. Therefore, this report records the implementation status
+instead of inventing benchmark values.
+
+\begin{table}[h]
+\centering
+\begin{tabular}{|p{0.38\textwidth}|p{0.20\textwidth}|p{0.28\textwidth}|}
+  \hline
+  \textbf{Evaluation Area} &
+  \textbf{Target Stage} &
+  \textbf{Current Status} \\
+  \hline
+  Authentication &
+  Functional &
+  Implemented for patient and doctor roles \\
+  \hline
+  Health ID &
+  Functional &
+  Automatic unique Health ID generation implemented \\
+  \hline
+  Hospital discovery &
+  Functional &
+  Search, filtering, sorting and pagination implemented \\
+  \hline
+  Medical records &
+  Functional &
+  CRUD, upload and mock hospital-fetch workflow implemented \\
+  \hline
+  Doctor access &
+  Functional &
+  PIN verification, 24-hour session and audit logs implemented \\
+  \hline
+  Appointments &
+  Functional &
+  Patient request and doctor status workflow implemented \\
+  \hline
+  Financial assistance &
+  Prototype &
+  Rule-based scoring and ML-service integration implemented \\
+  \hline
+  Emergency access &
+  Prototype &
+  Emergency profile and public Health-ID route implemented \\
+  \hline
+  Fundraising &
+  Prototype &
+  Campaign and donation backend workflow implemented \\
+  \hline
+\end{tabular}
+\caption{Mid-Semester Implementation Status}
+\label{tab:midsem-status}
+\end{table}
+
+\section{Analysis}
+
+The project has progressed substantially beyond the initial conceptual
+stage.
+
+\subsection{Objectives Achieved}
+
+The strongest progress has been made in the foundational healthcare
+platform:
+
+\begin{itemize}
+  \item The proposed multi-role authentication system has been
+    implemented.
+  \item A centralized patient Health ID has been integrated into the
+    data model and doctor-access workflow.
+  \item Hospital and doctor discovery has moved from proposal stage to
+    working backend and frontend modules.
+  \item Medical records now have a persistent data model and file-upload
+    workflow.
+  \item The privacy objective has been implemented through temporary
+    doctor access and access logging.
+  \item Financial assistance is represented through both a rule-based
+    engine and a separate prediction-service interface.
+\end{itemize}
+
+\subsection{Challenges Encountered}
+
+The main challenges at the mid-semester stage are related to integration
+and completion rather than the basic architecture.
+
+First, the project contains multiple independent workflows that must
+share authentication and patient identity securely. This increases the
+need for consistent route protection and permission checks.
+
+Second, healthcare information is sensitive. The design therefore has to
+distinguish between general profile information, emergency information,
+and complete medical records.
+
+Third, the financial component combines deterministic rules with a
+separate ML service. The backend must therefore continue functioning
+even when the external model service is unavailable.
+
+Finally, some backend functionality has been implemented ahead of the
+corresponding frontend screens. This is visible in the repository where
+several application routes currently use placeholder components.
+
+\subsection{Current Limitations}
+
+The following limitations are present in the current mid-semester
+implementation:
+
+\begin{itemize}
+  \item Several frontend routes are still placeholders.
+  \item The current Flask prediction endpoint is an MVP/demo prediction
+    implementation rather than a fully trained production model.
+  \item Production payment-gateway integration has not yet been
+    implemented for donations.
+  \item The project currently uses a mock hospital data-fetch workflow.
+  \item Formal automated unit and integration test coverage is not yet
+    represented in the repository at the level planned in the
+    architecture specification.
+  \item Final deployment, usability studies, and numerical performance
+    evaluation remain future tasks.
+\end{itemize}
+
+% ==================================================
+% CHAPTER 4
+% ==================================================
+
+\chapter{Conclusion}
+
+\section{Summary of Work}
+
+MediBridge was proposed as a centralized healthcare access and financial
+assistance platform that would simplify healthcare discovery, medical
+record management, financial-support workflows, and emergency access.
+
+During the period leading to the mid-semester evaluation, the project
+progressed from the proposal and architecture stage to a substantial
+full-stack MVP implementation.
+
+The developed system now contains a React frontend, Node.js/Express
+REST backend, MongoDB persistence layer, cloud-based file-storage
+integration, and a separate Flask prediction service.
+
+The core healthcare workflow has been implemented through user
+authentication, patient profiles, Health IDs, hospital discovery,
+appointments, medical records, doctor interaction, privacy-controlled
+access, and structured prescriptions. Financial assistance,
+fundraising, and emergency-profile workflows have also been established
+at the prototype level.
+
+\section{Key Findings}
+
+\begin{itemize}
+  \item \textbf{The three-tier architecture is suitable for the project:}
+    separating the React client, Express backend, and MongoDB persistence
+    allows the different healthcare workflows to be developed
+    modularly.
+
+  \item \textbf{Patient identity is an effective integration point:}
+    the MediBridge Health ID connects registration, doctor lookup,
+    patient records, consent management, and the emergency-access
+    workflow.
+
+  \item \textbf{Temporary authorization improves privacy control:}
+    PIN-based access sessions provide a concrete mechanism for granting
+    doctors time-limited access rather than exposing patient records
+    permanently.
+
+  \item \textbf{Financial assistance benefits from modular design:}
+    separating rule-based eligibility logic from the ML prediction API
+    makes it possible to evolve the prediction component independently
+    of the main platform.
+
+  \item \textbf{The current implementation is ahead of the basic MVP
+    foundation but not yet production-complete:} important work remains
+    in frontend integration, automated testing, deployment, real-world
+    integrations, and user evaluation.
+\end{itemize}
+
+\section{Future Work and Recommendations}
+
+The next development stage will focus on completing the remaining
+functional and integration work.
+
+\begin{enumerate}
+  \item Complete the frontend implementation of prescription viewing,
+    access logs, active access sessions, loan results, loan history,
+    fundraiser management, and remaining doctor workflows.
+
+  \item Integrate the existing backend prescription and consent
+    endpoints into their corresponding frontend pages.
+
+  \item Replace the current demonstration prediction logic with the
+    intended trained ML model and perform systematic model evaluation.
+
+  \item Complete NFC write/read integration and validate the emergency
+    access workflow on supported mobile devices.
+
+  \item Add comprehensive unit and integration tests for authentication,
+    access control, records, appointments, and financial workflows.
+
+  \item Improve database indexing and query optimization as the
+    healthcare dataset grows.
+
+  \item Add production-grade donation/payment processing instead of the
+    current MVP completion logic.
+
+  \item Replace the mock hospital-fetch integration with suitable
+    external healthcare interoperability mechanisms where feasible.
+
+  \item Conduct usability testing with representative users and measure
+    workflow completion time, document-access reliability,
+    satisfaction, and system availability as defined in the original
+    proposal.
+
+  \item Complete cloud deployment and end-to-end validation of the
+    platform.
+\end{enumerate}
+
+\section{Final Remarks}
+
+The mid-semester implementation demonstrates that the proposed
+MediBridge concept can be translated into a modular full-stack
+software system. The foundational architecture and several of the most
+important patient and doctor workflows are already implemented.
+
+The remaining development effort is primarily focused on completing
+frontend integration, strengthening testing and security validation,
+refining the financial prediction component, and preparing the platform
+for deployment and final evaluation.
+
+% ==================================================
+% BIBLIOGRAPHY
+% ==================================================
+
+\printbibliography[heading=bibintoc]
+
+\end{document}
