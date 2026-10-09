@@ -32,6 +32,13 @@ const useAuthStore = create((set) => ({
     localStorage.removeItem('refreshToken');
     set({ user: null, accessToken: null, isAuthenticated: false });
   },
+
+  logout: () => {
+    localStorage.removeItem('user');
+    localStorage.removeItem('accessToken');
+    localStorage.removeItem('refreshToken');
+    set({ user: null, accessToken: null, isAuthenticated: false });
+  },
 }));
 
 export default useAuthStore;

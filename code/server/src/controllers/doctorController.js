@@ -12,7 +12,7 @@ exports.searchPatient = asyncHandler(async (req, res) => {
   const { healthId } = req.query;
   if (!healthId) throw new ApiError(400, 'Health ID is required');
 
-  const patient = await User.findOne({ healthId, role: 'patient' }).select('firstName lastName gender dateOfBirth bloodGroup');
+  const patient = await User.findOne({ healthId, role: 'patient' }).select('firstName lastName healthId gender dateOfBirth bloodGroup');
   if (!patient) throw new ApiError(404, 'Patient not found');
 
   res.status(200).json({ success: true, data: patient });
@@ -20,11 +20,13 @@ exports.searchPatient = asyncHandler(async (req, res) => {
 
 exports.requestAccess = asyncHandler(async (req, res) => {
   const { healthId, accessPin } = req.body;
-  
-  const patient = await User.findOne({ healthId, role: 'patient' }).select('+accessPin');
+  const cleanId = String(healthId || '').trim().toUpperCase();
+  const cleanPin = String(accessPin || '').trim();
+
+  const patient = await User.findOne({ healthId: cleanId, role: 'patient' }).select('+accessPin');
   if (!patient) throw new ApiError(404, 'Patient not found');
 
-  const isMatch = await bcrypt.compare(accessPin, patient.accessPin);
+  const isMatch = await bcrypt.compare(cleanPin, patient.accessPin);
   if (!isMatch) throw new ApiError(401, 'Invalid Access PIN');
 
   const expiresAt = new Date();

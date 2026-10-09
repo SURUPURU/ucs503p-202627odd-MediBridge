@@ -1,14 +1,21 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { LogOut, User, Menu } from 'lucide-react';
+import toast from 'react-hot-toast';
 import useAuthStore from '../../store/authStore';
 
 const Navbar = ({ toggleSidebar }) => {
-  const { user, logout } = useAuthStore();
+  const { user, logout, clearAuth } = useAuthStore();
   const navigate = useNavigate();
+  const [dropdownOpen, setDropdownOpen] = useState(false);
 
   const handleLogout = () => {
-    logout();
+    if (typeof logout === 'function') {
+      logout();
+    } else if (typeof clearAuth === 'function') {
+      clearAuth();
+    }
+    toast.success('Logged out successfully');
     navigate('/login');
   };
 
@@ -26,20 +33,44 @@ const Navbar = ({ toggleSidebar }) => {
 
       <div className="flex items-center gap-4">
         {user && (
-          <div className="relative group">
-            <button className="flex items-center gap-2 hover:bg-slate-50 p-2 rounded-lg transition">
+          <div className="relative">
+            <button
+              onClick={() => setDropdownOpen(!dropdownOpen)}
+              className="flex items-center gap-2 hover:bg-slate-50 p-2 rounded-lg transition focus:outline-none"
+            >
               <div className="w-8 h-8 bg-blue-100 text-blue-600 rounded-full flex items-center justify-center font-bold">
                 {user.firstName?.charAt(0) || <User className="w-4 h-4" />}
               </div>
               <span className="hidden sm:block text-sm font-medium text-slate-700">{user.firstName} {user.lastName}</span>
             </button>
-            <div className="absolute right-0 mt-2 w-48 bg-white rounded-lg shadow-lg py-1 border border-slate-100 hidden group-hover:block">
-              <Link to="/profile" className="block px-4 py-2 text-sm text-slate-700 hover:bg-slate-50">Profile Settings</Link>
-              <button onClick={handleLogout} className="w-full text-left px-4 py-2 text-sm text-red-600 hover:bg-red-50 flex items-center gap-2">
-                <LogOut className="w-4 h-4" />
-                Logout
-              </button>
-            </div>
+
+            {dropdownOpen && (
+              <>
+                <div
+                  className="fixed inset-0 z-40"
+                  onClick={() => setDropdownOpen(false)}
+                />
+                <div className="absolute right-0 mt-2 w-48 bg-white rounded-lg shadow-lg py-1 border border-slate-100 z-50">
+                  <Link
+                    to="/profile"
+                    onClick={() => setDropdownOpen(false)}
+                    className="block px-4 py-2 text-sm text-slate-700 hover:bg-slate-50"
+                  >
+                    Profile Settings
+                  </Link>
+                  <button
+                    onClick={() => {
+                      setDropdownOpen(false);
+                      handleLogout();
+                    }}
+                    className="w-full text-left px-4 py-2 text-sm text-red-600 hover:bg-red-50 flex items-center gap-2"
+                  >
+                    <LogOut className="w-4 h-4" />
+                    Logout
+                  </button>
+                </div>
+              </>
+            )}
           </div>
         )}
       </div>

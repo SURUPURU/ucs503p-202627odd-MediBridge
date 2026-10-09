@@ -25,7 +25,12 @@ const Register = () => {
       toast.success(`Registered! Your Health ID is ${data.data.user.healthId}`);
       navigate('/dashboard');
     } catch (err) {
-      toast.error(err.response?.data?.message || 'Registration failed');
+      const fieldErrors = err.response?.data?.errors;
+      if (fieldErrors && fieldErrors.length > 0) {
+        toast.error(fieldErrors.map((e) => e.message).join('. '));
+      } else {
+        toast.error(err.response?.data?.message || 'Registration failed');
+      }
     } finally {
       setLoading(false);
     }

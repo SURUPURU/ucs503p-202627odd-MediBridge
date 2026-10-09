@@ -254,9 +254,10 @@ Shows the main patient workflow from registration/login through MediBridge servi
 
 Shows the main interactions between the Patient, Doctor, and MediBridge system.
 
-**Expected file:** `docs/diagrams/use_case_diagram/use_case_diagram.png`
+**Location:** `docs/diagrams/use_case_diagram/use_case_diagram.png`  
+**Editable Source:** [`docs/diagrams/use_case_diagram/use_case_diagram.drawio`](docs/diagrams/use_case_diagram/use_case_diagram.drawio) | [`docs/diagrams/use_case_diagram/use_case_diagram.xml`](docs/diagrams/use_case_diagram/use_case_diagram.xml)
 
-> **Placeholder:** The `docs/diagrams/use_case_diagram/` folder currently contains only `.gitkeep`. Add the use case diagram image here later.
+![MediBridge Use Case Diagram](docs/diagrams/use_case_diagram/use_case_diagram.png)
 
 ---
 
@@ -264,9 +265,10 @@ Shows the main interactions between the Patient, Doctor, and MediBridge system.
 
 Shows the main entities and relationships used by the MediBridge database.
 
-**Expected file:** `docs/diagrams/er_diagram/er.png`
+**Location:** `docs/diagrams/er_diagram/er.png`  
+**Editable Source:** [`docs/diagrams/er_diagram/er.drawio`](docs/diagrams/er_diagram/er.drawio) | [`docs/diagrams/er_diagram/er.xml`](docs/diagrams/er_diagram/er.xml)
 
-> **Placeholder:** The `docs/diagrams/er_diagram/` folder currently contains only `.gitkeep`. Add the ER diagram image here later.
+![MediBridge ER Diagram](docs/diagrams/er_diagram/er.png)
 
 ### Main Entities
 
@@ -561,5 +563,3 @@ Documentation
 **Stage:** MVP / Mid-semester development
 
 **Team Members:** Suryansh Pahuja & Kunal Motwani
-
-> ER and Use Case image placeholders are intentionally kept because those two folders are currently empty except for `.gitkeep`.

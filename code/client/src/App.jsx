@@ -7,7 +7,7 @@ import DashboardLayout from './components/layout/DashboardLayout';
 import ProtectedRoute from './routes/ProtectedRoute';
 import RoleRoute from './routes/RoleRoute';
 
-// Pages
+// Patient & Core Pages
 import PatientDashboard from './pages/dashboard/PatientDashboard';
 import DoctorDashboard from './pages/dashboard/DoctorDashboard';
 import PatientProfile from './pages/profile/PatientProfile';
@@ -15,16 +15,31 @@ import EmergencyProfile from './pages/profile/EmergencyProfile';
 import HealthIdPage from './pages/profile/HealthIdPage';
 import HospitalSearch from './pages/hospitals/HospitalSearch';
 import HospitalDetail from './pages/hospitals/HospitalDetail';
-import MedicalRecords from './pages/records/MedicalRecords';
-import UploadRecord from './pages/records/UploadRecord';
-import FindPatient from './pages/doctor/FindPatient';
-import ApplyLoan from './pages/financial/ApplyLoan';
-import EmergencyPublic from './pages/emergency/EmergencyPublic';
 import BookAppointment from './pages/hospitals/BookAppointment';
 import Appointments from './pages/dashboard/Appointments';
+import MedicalRecords from './pages/records/MedicalRecords';
+import UploadRecord from './pages/records/UploadRecord';
+import RecordDetail from './pages/records/RecordDetail';
+import Prescriptions from './pages/prescriptions/Prescriptions';
+import PrescriptionDetail from './pages/prescriptions/PrescriptionDetail';
+import AccessLog from './pages/access/AccessLog';
 
-// Placeholders for remaining ones so the app doesn't break
-const Placeholder = ({ name }) => <div className="p-8 text-xl font-bold">{name} Page (Coming Soon)</div>;
+// Financial & Crowdfunding Pages
+import ApplyLoan from './pages/financial/ApplyLoan';
+import LoanResult from './pages/financial/LoanResult';
+import LoanHistory from './pages/financial/LoanHistory';
+import CreateFundraiser from './pages/fundraiser/CreateFundraiser';
+import MyFundraisers from './pages/fundraiser/MyFundraisers';
+import FundraiserCampaign from './pages/fundraiser/FundraiserCampaign';
+
+// Doctor Portal Pages
+import FindPatient from './pages/doctor/FindPatient';
+import AddRecord from './pages/doctor/AddRecord';
+import WritePrescription from './pages/doctor/WritePrescription';
+import MyPatients from './pages/doctor/MyPatients';
+
+// Public Pages
+import EmergencyPublic from './pages/emergency/EmergencyPublic';
 
 const App = () => {
   return (
@@ -47,32 +62,42 @@ const App = () => {
         <Route path="/hospitals/:id/book" element={<RoleRoute allow={['patient']}><BookAppointment /></RoleRoute>} />
         <Route path="/appointments" element={<RoleRoute allow={['patient']}><Appointments /></RoleRoute>} />
         
+        {/* Medical Records */}
         <Route path="/records" element={<MedicalRecords />} />
         <Route path="/records/upload" element={<UploadRecord />} />
-        <Route path="/records/:id" element={<Placeholder name="Record Detail" />} />
+        <Route path="/records/:id" element={<RecordDetail />} />
         
-        <Route path="/prescriptions" element={<Placeholder name="Prescriptions" />} />
-        <Route path="/prescriptions/:id" element={<Placeholder name="Prescription Detail" />} />
-        <Route path="/access-log" element={<Placeholder name="Access Log" />} />
+        {/* Prescriptions */}
+        <Route path="/prescriptions" element={<Prescriptions />} />
+        <Route path="/prescriptions/:id" element={<PrescriptionDetail />} />
+        
+        {/* Patient Access Log */}
+        <Route path="/access-log" element={<AccessLog />} />
+        
+        {/* Financial / Loan */}
         <Route path="/financial/apply" element={<ApplyLoan />} />
-        <Route path="/financial/result" element={<Placeholder name="Loan Result" />} />
-        <Route path="/financial/history" element={<Placeholder name="Loan History" />} />
-        <Route path="/fundraiser/create" element={<Placeholder name="Create Fundraiser" />} />
-        <Route path="/fundraiser/my" element={<Placeholder name="My Fundraisers" />} />
+        <Route path="/financial/result" element={<LoanResult />} />
+        <Route path="/financial/history" element={<LoanHistory />} />
+        
+        {/* Fundraiser */}
+        <Route path="/fundraiser/create" element={<CreateFundraiser />} />
+        <Route path="/fundraiser/my" element={<MyFundraisers />} />
 
         {/* Doctor Routes */}
         <Route path="/doctor/dashboard" element={<RoleRoute allow={['doctor']}><DoctorDashboard /></RoleRoute>} />
         <Route path="/doctor/find-patient" element={<RoleRoute allow={['doctor']}><FindPatient /></RoleRoute>} />
-        <Route path="/doctor/patient/:healthId/add-record" element={<RoleRoute allow={['doctor']}><Placeholder name="Add Record" /></RoleRoute>} />
-        <Route path="/doctor/patient/:healthId/prescribe" element={<RoleRoute allow={['doctor']}><Placeholder name="Write Prescription" /></RoleRoute>} />
-        <Route path="/doctor/my-patients" element={<RoleRoute allow={['doctor']}><Placeholder name="My Patients" /></RoleRoute>} />
+        <Route path="/doctor/patient/:healthId/add-record" element={<RoleRoute allow={['doctor']}><AddRecord /></RoleRoute>} />
+        <Route path="/doctor/patient/:healthId/prescribe" element={<RoleRoute allow={['doctor']}><WritePrescription /></RoleRoute>} />
+        <Route path="/doctor/my-patients" element={<RoleRoute allow={['doctor']}><MyPatients /></RoleRoute>} />
 
       </Route>
 
-      {/* Public Routes */}
+      {/* Public Routes (No Auth) */}
       <Route path="/emergency/:healthId" element={<EmergencyPublic />} />
-      <Route path="/fundraiser/:slug" element={<Placeholder name="Fundraiser Campaign" />} />
+      <Route path="/fundraiser/:slug" element={<FundraiserCampaign />} />
       
+      {/* Catch-all redirect */}
+      <Route path="*" element={<Navigate to="/dashboard" replace />} />
     </Routes>
   );
 };
