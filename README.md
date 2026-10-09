@@ -10,7 +10,6 @@
 |---|---:|
 | **Suryansh Pahuja** | 1024160058 |
 | **Kunal Motwani** | 1024160137 |
-
 ---
 
 ## Project Goal
@@ -119,7 +118,6 @@ MediBridge follows a three-layer application architecture.
 | File Storage | Cloudinary |
 | ML API | Python, Flask |
 | API Communication | REST / Axios |
-
 ---
 
 # Core Modules
@@ -138,7 +136,6 @@ MediBridge follows a three-layer application architecture.
 | Financial Assistance | Loan application and eligibility assessment |
 | ML Prediction | ML-assisted loan eligibility prediction |
 | Fundraising | Healthcare campaigns and donations |
-
 ---
 
 ### Doctor Record Access Flow
@@ -241,33 +238,25 @@ The backend communicates with the separate Python/Flask model API through an HTT
 
 # System Diagrams
 
-All project diagrams are maintained under:
-
-`docs/diagrams/`
-
-The repository contains dedicated folders for the major software-engineering diagrams. ******Image references are intentionally included below even when a folder/file has not been populated yet. Add the corresponding image later without changing this README.******
-
----
+All diagrams are stored under `docs/diagrams/`.
 
 ## 1. Activity Diagram
 
-Shows the main patient workflow from registration/login through the major MediBridge services.
+Shows the main patient workflow from registration/login through MediBridge services.
 
-**Location:** `docs/diagrams/activity_diagram/activity_diagram.png`
+**File:** `docs/diagrams/activity_diagram/activity_diagram.png`
 
 ![MediBridge Activity Diagram](docs/diagrams/activity_diagram/activity_diagram.png)
-
 
 ---
 
 ## 2. Use Case Diagram
 
-Shows the major interactions between the Patient, Doctor and MediBridge system.
+Shows the main interactions between the Patient, Doctor, and MediBridge system.
 
-**Location:** `docs/diagrams/use_case_diagram/use_case_diagram.png`
+**Expected file:** `docs/diagrams/use_case_diagram/use_case_diagram.png`
 
-![MediBridge Use Case Diagram](docs/diagrams/use_case_diagram/use_case_diagram.png)
-
+> **Placeholder:** The `docs/diagrams/use_case_diagram/` folder currently contains only `.gitkeep`. Add the use case diagram image here later.
 
 ---
 
@@ -275,209 +264,56 @@ Shows the major interactions between the Patient, Doctor and MediBridge system.
 
 Shows the main entities and relationships used by the MediBridge database.
 
-**Location:** `docs/diagrams/er_diagram/er.png`
+**Expected file:** `docs/diagrams/er_diagram/er.png`
 
-![MediBridge ER Diagram](docs/diagrams/er_diagram/er.png)
-
+> **Placeholder:** The `docs/diagrams/er_diagram/` folder currently contains only `.gitkeep`. Add the ER diagram image here later.
 
 ### Main Entities
 
 ```text
-
 USER
-
- ├── Medical Records
-
- ├── Prescriptions
-
- ├── Appointments
-
- ├── Emergency Profile
-
- ├── Access Sessions / Logs
-
- ├── Loan Applications
-
- └── Fundraisers
-
-        └── Donations
+ ├── Medical Records
+ ├── Prescriptions
+ ├── Appointments
+ ├── Emergency Profile
+ ├── Access Sessions / Logs
+ ├── Loan Applications
+ └── Fundraisers
+      └── Donations
 
 HOSPITAL
-
- └── DOCTOR
-
+ └── DOCTOR
 ```
 
 ---
 
-# 4. Data Flow Diagrams
+## 4. Data Flow Diagrams
 
-The DFDs are divided into multiple diagrams to keep them readable.
+The DFDs are kept concise for the prototype. Level 0 shows the system boundary, Level 1 shows the overall processes, and Level 2 details the two most important workflows.
 
-## DFD Level 0 — Context Diagram
+### DFD Level 0 — Context Diagram
 
-**Location:** `docs/diagrams/data_flow_diagram/level0.png`
+**File:** `docs/diagrams/data_flow_diagram/level0.png`
 
-![DFD Level 0](docs/diagrams/data_flow_diagram/level0.png)
+![DFD Level 0 — MediBridge Context Diagram](docs/diagrams/data_flow_diagram/level0.png)
 
+### DFD Level 1 — Overall System
 
----
+**File:** `docs/diagrams/data_flow_diagram/level1_overall.png`
 
-## DFD Level 1 — Authentication, Profile & Healthcare
+![DFD Level 1 — Overall MediBridge System](docs/diagrams/data_flow_diagram/level1_overall.png)
 
-**Location:** `docs/diagrams/data_flow_diagram/level1_patient_services.png`
+### DFD Level 2 — Financial Assistance and ML
 
-![DFD Level 1 - Authentication and Healthcare](docs/diagrams/data_flow_diagram/level1_patient_services.png)
+**File:** `docs/diagrams/data_flow_diagram/level2_financial_ml.png`
 
+![DFD Level 2 — Financial Assistance and ML Prediction](docs/diagrams/data_flow_diagram/level2_financial_ml.png)
 
----
+### DFD Level 2 — Medical Records and Doctor Access
 
-## DFD Level 1 — Medical Records & Doctor Access
+**File:** `docs/diagrams/data_flow_diagram/level2_medical_records.png`
 
-**Location:** `docs/diagrams/data_flow_diagram/level1_medical_records.png`
-
-![DFD Level 1 - Medical Records](docs/diagrams/data_flow_diagram/level1_medical_records.png)
-
-
----
-
-## DFD Level 1 — Financial Assistance & Fundraising
-
-**Location:** `docs/diagrams/data_flow_diagram/level1_finantial_assistance.png`
-
-![DFD Level 1 - Financial Assistance](docs/diagrams/data_flow_diagram/level1_finantial_assistance.png)
-
-
----
-
-## DFD Level 2 — Authentication & Profile
-
-**Location:** `docs/diagrams/data_flow_diagram/level2_authentication.png`
-
-![DFD Level 2 - Authentication](docs/diagrams/data_flow_diagram/level2_authentication.png)
-
-
----
-
-## DFD Level 2 — Hospital & Appointment
-
-**Location:** `docs/diagrams/data_flow_diagram/level2_appointment.png`
-
-![DFD Level 2 - Hospital and Appointment](docs/diagrams/data_flow_diagram/level2_appointment.png)
-
-
----
-
-## DFD Level 2 — Medical Records & Access
-
-**Location:** `docs/diagrams/data_flow_diagram/level2_medical_records.png`
-
-![DFD Level 2 - Medical Records and Access](docs/diagrams/data_flow_diagram/level2_medical_records.png)
-
-
----
-
-## DFD Level 2 — Financial Assistance & ML
-
-**Location:** `docs/diagrams/data_flow_diagram/level2_ml_model.png`
-
-![DFD Level 2 - Financial and ML](docs/diagrams/data_flow_diagram/level2_ml_model.png)
-
-
----
-
-## DFD Level 2 — Fundraising
-
-**Location:** `docs/diagrams/data_flow_diagram/level2_fundraising.png`
-
-![DFD Level 2 - Fundraising](docs/diagrams/data_flow_diagram/level2_fundraising.png)
-
-
----
-
-# Repository Structure
-
-```text
-
-MediBridge/
-
-│
-
-├── code/
-
-│   ├── client/             # React frontend
-
-│   ├── server/             # Node.js / Express backend
-
-│   ├── model-api/          # Python / Flask ML API
-
-│   └── ARCHITECTURE.md
-
-│
-
-├── docs/
-
-│   └── diagrams/
-
-│       ├── activity_diagram/
-
-│       │   └── activity.png
-
-│       │
-
-│       ├── data_flow_diagram/
-
-│       │   ├── dfd_level_0.png
-
-│       │   ├── dfd_level_1_auth_healthcare.png
-
-│       │   ├── dfd_level_1_medical_records.png
-
-│       │   ├── dfd_level_1_financial.png
-
-│       │   ├── dfd_level_2_auth_profile.png
-
-│       │   ├── dfd_level_2_hospital_appointment.png
-
-│       │   ├── dfd_level_2_medical_records.png
-
-│       │   ├── dfd_level_2_financial_ml.png
-
-│       │   └── dfd_level_2_fundraising.png
-
-│       │
-
-│       ├── er_diagram/
-
-│       │   └── er.png
-
-│       │
-
-│       └── use_case_diagram/
-
-│           └── use_case_diagram.png
-
-│
-
-├── journals/
-
-│   ├── 1024160058-suryansh.md
-
-│   ├── 1024160137-kunal.md
-
-│   └── ...
-
-│
-
-├── project-proposal/
-
-│   └── Project Proposal - MediBridge.pdf
-
-│
-
-└── README.md
-
-```
+![DFD Level 2 — Medical Records and Doctor Access](docs/diagrams/data_flow_diagram/level2_medical_records.png)
 
 ---
 
@@ -632,7 +468,6 @@ The project can be evaluated using:
 | Document access reliability | Measures reliability of medical-document access |
 | User satisfaction | Measures overall user experience |
 | System availability | Measures system reliability |
-
 ---
 
 # Risk Considerations
@@ -644,7 +479,6 @@ The project can be evaluated using:
 | External healthcare dependencies | API-based modular integration |
 | Document security | Controlled access and secure document storage |
 | Service dependency | Modular services and fallback handling |
-
 ---
 
 # Development Approach
@@ -718,10 +552,9 @@ Documentation
 | ER Diagram | `docs/diagrams/er_diagram/` |
 | DFDs | `docs/diagrams/data_flow_diagram/` |
 | Team Journals | `journals/` |
-
 ---
 
-## Status
+## 📄 Status
 
 **Project:** MediBridge
 
@@ -729,3 +562,4 @@ Documentation
 
 **Team Members:** Suryansh Pahuja & Kunal Motwani
 
+> ER and Use Case image placeholders are intentionally kept because those two folders are currently empty except for `.gitkeep`.
