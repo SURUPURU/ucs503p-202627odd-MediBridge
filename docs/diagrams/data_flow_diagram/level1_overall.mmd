@@ -1,0 +1,56 @@
+%%{init: {"theme":"base","themeVariables":{"fontSize":"15px","fontFamily":"Arial, Helvetica, sans-serif","primaryTextColor":"#111","lineColor":"#222","edgeLabelBackground":"#ffffff"},"flowchart":{"curve":"basis","nodeSpacing":55,"rankSpacing":90,"htmlLabels":true}}}%%
+flowchart LR
+    PAT[Patient]:::ext
+    DOC[Doctor]:::ext
+    ML[ML Prediction<br/>Service]:::ext
+
+    P1(("<b>1.0</b><br/>Authentication<br/>and Profile")):::proc
+    P2(("<b>2.0</b><br/>Hospital and<br/>Appointments")):::proc
+    P3(("<b>3.0</b><br/>Medical Records<br/>and Doctor Access")):::proc
+    P4(("<b>4.0</b><br/>Financial<br/>Assistance")):::proc
+    P5(("<b>5.0</b><br/>Fundraising")):::proc
+
+    D1[("D1 User Database")]:::store
+    D9[("D9 Emergency Profiles")]:::store
+    D2[("D2 Hospital and<br/>Doctor Database")]:::store
+    D3[("D3 Appointment<br/>Database")]:::store
+    D4[("D4 Medical Records")]:::store
+    D5[("D5 Access Sessions<br/>and Logs")]:::store
+    D6[("D6 Prescriptions")]:::store
+    D7[("D7 Loan Applications")]:::store
+    D8[("D8 Fundraisers<br/>and Donations")]:::store
+
+    PAT -->|Credentials,<br/>Profile Requests| P1
+    DOC -->|Credentials| P1
+    P1 -->|Authentication Result,<br/>Profile Data, Health ID,<br/>Emergency Information| PAT
+    P1 -->|Authentication Result| DOC
+    P1 <-->|User / Profile Data| D1
+    P1 <-->|Emergency Profile Data| D9
+
+    PAT -->|Search Queries,<br/>Appointment Details| P2
+    P2 -->|Search Results,<br/>Appointment Status| PAT
+    P2 <-->|Hospital / Doctor Information| D2
+    P2 <-->|Appointment Data| D3
+
+    PAT -->|Record Uploads,<br/>Record Requests| P3
+    P3 -->|Record Status,<br/>Prescription Information| PAT
+    DOC -->|Health ID Search,<br/>Access Request, Care Data| P3
+    P3 -->|Authorized Patient Records,<br/>Prescription Information| DOC
+    P3 <-->|Patient Identity Data| D1
+    P3 <-->|Medical Records| D4
+    P3 <-->|Session Data, Access Logs| D5
+    P3 <-->|Prescription Data| D6
+
+    PAT -->|Loan Application Details| P4
+    P4 -->|Eligibility Result| PAT
+    P4 -->|Applicant / Loan Data| ML
+    ML -->|Prediction Result| P4
+    P4 <-->|Application and<br/>Assessment Data| D7
+
+    PAT -->|Campaign Details,<br/>Management Requests| P5
+    P5 -->|Campaign Status,<br/>Funding Information| PAT
+    P5 <-->|Campaign and Donation Data| D8
+
+    classDef ext fill:#ffffff,stroke:#111,stroke-width:2px,color:#111;
+    classDef proc fill:#eef4ff,stroke:#1a3a6e,stroke-width:2px,color:#111;
+    classDef store fill:#fff8e6,stroke:#7a5a00,stroke-width:2px,color:#111;

@@ -1,0 +1,17 @@
+%%{init: {"theme":"base","themeVariables":{"fontSize":"15px","fontFamily":"Arial, Helvetica, sans-serif","primaryTextColor":"#111","lineColor":"#222","edgeLabelBackground":"#ffffff"},"flowchart":{"curve":"basis","nodeSpacing":55,"rankSpacing":90,"htmlLabels":true}}}%%
+flowchart LR
+    PAT[Patient]:::ext
+    DOC[Doctor]:::ext
+    P0((<b>0.<br/>MediBridge</b>)):::proc
+    ML[ML Prediction<br/>Service]:::ext
+
+    PAT -->|Data / Requests| P0
+    P0 -->|Healthcare Services / Results| PAT
+    DOC -->|Patient Care Data| P0
+    P0 -->|Authorized Patient Records| DOC
+    P0 -->|Loan Application Data| ML
+    ML -->|Prediction Result| P0
+
+    classDef ext fill:#ffffff,stroke:#111,stroke-width:2px,color:#111;
+    classDef proc fill:#eef4ff,stroke:#1a3a6e,stroke-width:2px,color:#111;
+    classDef store fill:#fff8e6,stroke:#7a5a00,stroke-width:2px,color:#111;

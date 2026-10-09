@@ -1,0 +1,29 @@
+%%{init: {"theme":"base","themeVariables":{"fontSize":"15px","fontFamily":"Arial, Helvetica, sans-serif","primaryTextColor":"#111","lineColor":"#222","edgeLabelBackground":"#ffffff"},"flowchart":{"curve":"basis","nodeSpacing":55,"rankSpacing":90,"htmlLabels":true}}}%%
+flowchart LR
+    PAT[Patient]:::ext
+    ML[ML Prediction<br/>Service]:::ext
+
+    P41(("<b>4.1</b><br/>Submit Loan<br/>Application")):::proc
+    P42(("<b>4.2</b><br/>Validate<br/>Application Data")):::proc
+    P43(("<b>4.3</b><br/>Calculate<br/>Rule-Based Score")):::proc
+    P44(("<b>4.4</b><br/>Request ML<br/>Prediction")):::proc
+    P45(("<b>4.5</b><br/>Combine<br/>Assessment Results")):::proc
+    P46(("<b>4.6</b><br/>Store Application and<br/>Return Eligibility")):::proc
+
+    D7[("D7 Loan Applications")]:::store
+
+    PAT -->|Loan Application Details| P41
+    P41 -->|Loan Application Data| P42
+    P42 -->|Validated Application Data| P43
+    P43 -->|Applicant / Loan Data| P44
+    P44 -->|Prediction Request| ML
+    ML -->|Prediction Result| P44
+    P43 -->|Rule-Based Score| P45
+    P44 -->|Prediction Result| P45
+    P45 -->|Combined Eligibility Assessment| P46
+    P46 <-->|Application and<br/>Assessment Data| D7
+    P46 -->|Eligibility Result| PAT
+
+    classDef ext fill:#ffffff,stroke:#111,stroke-width:2px,color:#111;
+    classDef proc fill:#eef4ff,stroke:#1a3a6e,stroke-width:2px,color:#111;
+    classDef store fill:#fff8e6,stroke:#7a5a00,stroke-width:2px,color:#111;

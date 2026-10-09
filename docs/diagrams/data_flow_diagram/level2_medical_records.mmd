@@ -1,0 +1,49 @@
+%%{init: {"theme":"base","themeVariables":{"fontSize":"15px","fontFamily":"Arial, Helvetica, sans-serif","primaryTextColor":"#111","lineColor":"#222","edgeLabelBackground":"#ffffff"},"flowchart":{"curve":"basis","nodeSpacing":55,"rankSpacing":90,"htmlLabels":true}}}%%
+flowchart LR
+    DOC[Doctor]:::ext
+    PAT[Patient]:::ext
+
+    P31(("<b>3.1</b><br/>Find Patient<br/>by Health ID")):::proc
+    P32(("<b>3.2</b><br/>Verify<br/>Access PIN")):::proc
+    P33(("<b>3.3</b><br/>Create or Validate<br/>Access Session")):::proc
+    P34(("<b>3.4</b><br/>View or Update<br/>Medical Records")):::proc
+    P35(("<b>3.5</b><br/>Retrieve or Manage<br/>Prescriptions")):::proc
+    P36(("<b>3.6</b><br/>Record<br/>Access Activity")):::proc
+
+    D1[("D1 User Database")]:::store
+    D5[("D5 Access Sessions<br/>and Logs")]:::store
+    D4[("D4 Medical Records")]:::store
+    D6[("D6 Prescriptions")]:::store
+
+    DOC -->|Health ID Search| P31
+    P31 <-->|Patient Identity Data| D1
+    P31 -->|Patient Search Result| DOC
+    P31 -->|Selected Patient Reference| P32
+
+    DOC -->|Access PIN| P32
+    D1 -->|Stored PIN Data| P32
+    P32 -->|Verification Result| P33
+    P33 <-->|Session Data| D5
+
+    P33 -->|Session Authorization| P34
+    P33 -->|Session Authorization| P35
+
+    DOC -->|Record Requests,<br/>Care Data| P34
+    PAT -->|Record Uploads,<br/>Record Requests| P34
+    P34 <-->|Medical Records| D4
+    P34 -->|Authorized Patient Records| DOC
+    P34 -->|Record Status| PAT
+
+    DOC -->|Prescription Data| P35
+    P35 <-->|Prescription Data| D6
+    P35 -->|Prescription Information| DOC
+    P35 -->|Patient-Accessible<br/>Prescription Information| PAT
+
+    P33 -->|Session Event| P36
+    P34 -->|Record Access Event| P36
+    P35 -->|Prescription Access Event| P36
+    P36 -->|Access Log Entry| D5
+
+    classDef ext fill:#ffffff,stroke:#111,stroke-width:2px,color:#111;
+    classDef proc fill:#eef4ff,stroke:#1a3a6e,stroke-width:2px,color:#111;
+    classDef store fill:#fff8e6,stroke:#7a5a00,stroke-width:2px,color:#111;
