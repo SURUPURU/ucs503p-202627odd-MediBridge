@@ -22,6 +22,8 @@ flowchart LR
 
     PAT -->|Credentials,<br/>Profile Requests| P1
     DOC -->|Credentials| P1
+    DOC -->|Appointment Status Updates| P2
+    P2 -->|Appointment Requests| DOC
     P1 -->|Authentication Result,<br/>Profile Data, Health ID,<br/>Emergency Information| PAT
     P1 -->|Authentication Result| DOC
     P1 <-->|User / Profile Data| D1
