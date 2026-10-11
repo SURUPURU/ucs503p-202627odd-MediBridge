@@ -1,0 +1,361 @@
+<mxfile host="app.diagrams.net" agent="Mozilla/5.0">
+  <diagram id="medibridge-er-diagram" name="MediBridge Entity Relationship Diagram">
+    <mxGraphModel dx="2016" dy="1195" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1500" pageHeight="1200" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="ent_user" parent="1" style="shape=rectangle;whiteSpace=wrap;html=1;fontSize=15;fontStyle=1;strokeWidth=1.5;" value="User" vertex="1">
+          <mxGeometry height="65" width="160" x="580" y="80" as="geometry" />
+        </mxCell>
+        <mxCell id="att_user_id" parent="1" style="ellipse;whiteSpace=wrap;html=1;fontSize=12;fillColor=#FFFFFF;strokeColor=#000000;" value="&lt;u&gt;UserID&lt;/u&gt;" vertex="1">
+          <mxGeometry height="40" width="110" x="380" y="30" as="geometry" />
+        </mxCell>
+        <mxCell id="att_user_email" parent="1" style="ellipse;whiteSpace=wrap;html=1;fontSize=12;fillColor=#FFFFFF;strokeColor=#000000;" value="email" vertex="1">
+          <mxGeometry height="40" width="110" x="380" y="80" as="geometry" />
+        </mxCell>
+        <mxCell id="att_user_role" parent="1" style="ellipse;whiteSpace=wrap;html=1;fontSize=12;fillColor=#FFFFFF;strokeColor=#000000;" value="role" vertex="1">
+          <mxGeometry height="40" width="110" x="380" y="130" as="geometry" />
+        </mxCell>
+        <mxCell id="att_user_healthid" parent="1" style="ellipse;whiteSpace=wrap;html=1;fontSize=12;fillColor=#FFFFFF;strokeColor=#000000;" value="healthId" vertex="1">
+          <mxGeometry height="40" width="110" x="400" y="200" as="geometry" />
+        </mxCell>
+        <mxCell id="att_user_pin" parent="1" style="ellipse;whiteSpace=wrap;html=1;fontSize=12;fillColor=#FFFFFF;strokeColor=#000000;" value="accessPin" vertex="1">
+          <mxGeometry height="40" width="110" x="605" y="15" as="geometry" />
+        </mxCell>
+        <mxCell id="edge_u_id" edge="1" parent="1" source="ent_user" style="endArrow=none;html=1;strokeColor=#000000;" target="att_user_id">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="edge_u_email" edge="1" parent="1" source="ent_user" style="endArrow=none;html=1;strokeColor=#000000;" target="att_user_email">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="edge_u_role" edge="1" parent="1" source="ent_user" style="endArrow=none;html=1;strokeColor=#000000;" target="att_user_role">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="edge_u_healthid" edge="1" parent="1" source="ent_user" style="endArrow=none;html=1;strokeColor=#000000;" target="att_user_healthid">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="edge_u_pin" edge="1" parent="1" source="ent_user" style="endArrow=none;html=1;strokeColor=#000000;" target="att_user_pin">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="rel_has_emerg" parent="1" style="shape=rhombus;double=1;whiteSpace=wrap;html=1;fontSize=13;fontStyle=1;fillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.2;" value="Has" vertex="1">
+          <mxGeometry height="60" width="100" x="240" y="190" as="geometry" />
+        </mxCell>
+        <mxCell id="edge_u_emerg" edge="1" parent="1" source="ent_user" style="endArrow=none;html=1;strokeColor=#000000;fontSize=12;fontStyle=1;" target="rel_has_emerg" value="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="ent_emerg" parent="1" style="shape=rectangle;double=1;whiteSpace=wrap;html=1;fontSize=14;fontStyle=1;fillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;" value="Emergency-Profile" vertex="1">
+          <mxGeometry height="65" width="160" x="210" y="300" as="geometry" />
+        </mxCell>
+        <mxCell id="edge_rel_emerg" edge="1" parent="1" source="rel_has_emerg" style="endArrow=none;html=1;strokeColor=#000000;fontSize=12;fontStyle=1;" target="ent_emerg" value="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="att_emerg_partkey" parent="1" style="ellipse;dashed=1;whiteSpace=wrap;html=1;fontSize=12;fillColor=#FFFFFF;strokeColor=#000000;" value="&lt;span style=&quot;border-bottom: 1px dashed black;&quot;&gt;ProfileNo&lt;/span&gt;" vertex="1">
+          <mxGeometry height="40" width="115" x="40" y="250" as="geometry" />
+        </mxCell>
+        <mxCell id="att_emerg_fk" parent="1" style="ellipse;whiteSpace=wrap;html=1;fontSize=12;fillColor=#FFFFFF;strokeColor=#000000;" value="UserID(FK)" vertex="1">
+          <mxGeometry height="40" width="115" x="40" y="300" as="geometry" />
+        </mxCell>
+        <mxCell id="att_emerg_blood" parent="1" style="ellipse;whiteSpace=wrap;html=1;fontSize=12;fillColor=#FFFFFF;strokeColor=#000000;" value="bloodGroup" vertex="1">
+          <mxGeometry height="40" width="115" x="40" y="350" as="geometry" />
+        </mxCell>
+        <mxCell id="att_emerg_allergies" parent="1" style="ellipse;whiteSpace=wrap;html=1;fontSize=12;fillColor=#FFFFFF;strokeColor=#000000;" value="allergies" vertex="1">
+          <mxGeometry height="40" width="115" x="40" y="400" as="geometry" />
+        </mxCell>
+        <mxCell id="att_emerg_contact" parent="1" style="ellipse;whiteSpace=wrap;html=1;fontSize=11;fillColor=#FFFFFF;strokeColor=#000000;" value="emergencyContact" vertex="1">
+          <mxGeometry height="40" width="125" x="60" y="450" as="geometry" />
+        </mxCell>
+        <mxCell id="edge_em_pk" edge="1" parent="1" source="ent_emerg" style="endArrow=none;html=1;strokeColor=#000000;" target="att_emerg_partkey">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="edge_em_fk" edge="1" parent="1" source="ent_emerg" style="endArrow=none;html=1;strokeColor=#000000;" target="att_emerg_fk">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="edge_em_blood" edge="1" parent="1" source="ent_emerg" style="endArrow=none;html=1;strokeColor=#000000;" target="att_emerg_blood">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="edge_em_all" edge="1" parent="1" source="ent_emerg" style="endArrow=none;html=1;strokeColor=#000000;" target="att_emerg_allergies">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="edge_em_cont" edge="1" parent="1" source="ent_emerg" style="endArrow=none;html=1;strokeColor=#000000;" target="att_emerg_contact">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="rel_grants" parent="1" style="shape=rhombus;whiteSpace=wrap;html=1;fontSize=13;fontStyle=1;fillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.2;" value="Grants" vertex="1">
+          <mxGeometry height="60" width="100" x="610" y="210" as="geometry" />
+        </mxCell>
+        <mxCell id="edge_u_grants" edge="1" parent="1" source="ent_user" style="endArrow=none;html=1;strokeColor=#000000;fontSize=12;fontStyle=1;" target="rel_grants" value="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="ent_session" parent="1" style="shape=rectangle;double=1;whiteSpace=wrap;html=1;fontSize=14;fontStyle=1;fillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;" value="Access-Session" vertex="1">
+          <mxGeometry height="65" width="160" x="580" y="330" as="geometry" />
+        </mxCell>
+        <mxCell id="edge_grants_sess" edge="1" parent="1" source="rel_grants" style="endArrow=none;html=1;strokeColor=#000000;fontSize=12;fontStyle=1;" target="ent_session" value="N">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="att_sess_partkey" parent="1" style="ellipse;dashed=1;whiteSpace=wrap;html=1;fontSize=12;fillColor=#FFFFFF;strokeColor=#000000;" value="&lt;span style=&quot;border-bottom: 1px dashed black;&quot;&gt;SessionNo&lt;/span&gt;" vertex="1">
+          <mxGeometry height="40" width="100" x="605" y="530" as="geometry" />
+        </mxCell>
+        <mxCell id="att_sess_exp" parent="1" style="ellipse;whiteSpace=wrap;html=1;fontSize=12;fillColor=#FFFFFF;strokeColor=#000000;" value="expiresAt" vertex="1">
+          <mxGeometry height="40" width="110" x="540" y="480" as="geometry" />
+        </mxCell>
+        <mxCell id="att_sess_stat" parent="1" style="ellipse;whiteSpace=wrap;html=1;fontSize=12;fillColor=#FFFFFF;strokeColor=#000000;" value="status" vertex="1">
+          <mxGeometry height="40" width="110" x="675" y="440" as="geometry" />
+        </mxCell>
+        <mxCell id="att_sess_perm" parent="1" style="ellipse;whiteSpace=wrap;html=1;fontSize=12;fillColor=#FFFFFF;strokeColor=#000000;" value="permissions" vertex="1">
+          <mxGeometry height="40" width="90" x="525" y="430" as="geometry" />
+        </mxCell>
+        <mxCell id="edge_s_pk" edge="1" parent="1" source="ent_session" style="endArrow=none;html=1;strokeColor=#000000;" target="att_sess_partkey">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="edge_s_exp" edge="1" parent="1" source="ent_session" style="endArrow=none;html=1;strokeColor=#000000;" target="att_sess_exp">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="edge_s_stat" edge="1" parent="1" source="ent_session" style="endArrow=none;html=1;strokeColor=#000000;" target="att_sess_stat">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="edge_s_perm" edge="1" parent="1" source="ent_session" style="endArrow=none;html=1;strokeColor=#000000;" target="att_sess_perm">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="rel_receives_sess" parent="1" style="shape=rhombus;double=1;whiteSpace=wrap;html=1;fontSize=13;fontStyle=1;fillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.2;" value="Receives" vertex="1">
+          <mxGeometry height="60" width="100" x="810" y="332" as="geometry" />
+        </mxCell>
+        <mxCell id="edge_sess_rec" edge="1" parent="1" source="ent_session" style="endArrow=none;html=1;strokeColor=#000000;fontSize=12;fontStyle=1;" target="rel_receives_sess" value="N">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="ent_doctor" parent="1" style="shape=rectangle;whiteSpace=wrap;html=1;fontSize=15;fontStyle=1;fillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;" value="Doctor" vertex="1">
+          <mxGeometry height="65" width="160" x="980" y="330" as="geometry" />
+        </mxCell>
+        <mxCell id="edge_doc_rec" edge="1" parent="1" source="rel_receives_sess" style="endArrow=none;html=1;strokeColor=#000000;fontSize=12;fontStyle=1;" target="ent_doctor" value="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="att_doc_id" parent="1" style="ellipse;whiteSpace=wrap;html=1;fontSize=12;fillColor=#FFFFFF;strokeColor=#000000;" value="&lt;u&gt;DoctorID&lt;/u&gt;" vertex="1">
+          <mxGeometry height="40" width="115" x="1190" y="270" as="geometry" />
+        </mxCell>
+        <mxCell id="att_doc_spec" parent="1" style="ellipse;whiteSpace=wrap;html=1;fontSize=12;fillColor=#FFFFFF;strokeColor=#000000;" value="specialization" vertex="1">
+          <mxGeometry height="40" width="115" x="1190" y="320" as="geometry" />
+        </mxCell>
+        <mxCell id="att_doc_qual" parent="1" style="ellipse;whiteSpace=wrap;html=1;fontSize=12;fillColor=#FFFFFF;strokeColor=#000000;" value="qualification" vertex="1">
+          <mxGeometry height="40" width="115" x="1190" y="370" as="geometry" />
+        </mxCell>
+        <mxCell id="att_doc_lic" parent="1" style="ellipse;whiteSpace=wrap;html=1;fontSize=12;fillColor=#FFFFFF;strokeColor=#000000;" value="licenseNumber" vertex="1">
+          <mxGeometry height="40" width="115" x="1190" y="420" as="geometry" />
+        </mxCell>
+        <mxCell id="att_doc_fee" parent="1" style="ellipse;whiteSpace=wrap;html=1;fontSize=11;fillColor=#FFFFFF;strokeColor=#000000;" value="consultationFee" vertex="1">
+          <mxGeometry height="40" width="115" x="1190" y="470" as="geometry" />
+        </mxCell>
+        <mxCell id="edge_d_id" edge="1" parent="1" source="ent_doctor" style="endArrow=none;html=1;strokeColor=#000000;" target="att_doc_id">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="edge_d_spec" edge="1" parent="1" source="ent_doctor" style="endArrow=none;html=1;strokeColor=#000000;" target="att_doc_spec">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="edge_d_qual" edge="1" parent="1" source="ent_doctor" style="endArrow=none;html=1;strokeColor=#000000;" target="att_doc_qual">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="edge_d_lic" edge="1" parent="1" source="ent_doctor" style="endArrow=none;html=1;strokeColor=#000000;" target="att_doc_lic">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="edge_d_fee" edge="1" parent="1" source="ent_doctor" style="endArrow=none;html=1;strokeColor=#000000;" target="att_doc_fee">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="rel_works_in" parent="1" style="shape=rhombus;whiteSpace=wrap;html=1;fontSize=13;fontStyle=1;fillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.2;" value="Works-In" vertex="1">
+          <mxGeometry height="60" width="100" x="1010" y="460" as="geometry" />
+        </mxCell>
+        <mxCell id="edge_d_works" edge="1" parent="1" source="ent_doctor" style="endArrow=none;html=1;strokeColor=#000000;fontSize=12;fontStyle=1;" target="rel_works_in" value="N">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="ent_hospital" parent="1" style="shape=rectangle;whiteSpace=wrap;html=1;fontSize=15;fontStyle=1;fillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;" value="Hospital" vertex="1">
+          <mxGeometry height="65" width="160" x="980" y="580" as="geometry" />
+        </mxCell>
+        <mxCell id="edge_works_hosp" edge="1" parent="1" source="rel_works_in" style="endArrow=none;html=1;strokeColor=#000000;fontSize=12;fontStyle=1;" target="ent_hospital" value="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="att_hosp_id" parent="1" style="ellipse;whiteSpace=wrap;html=1;fontSize=12;fillColor=#FFFFFF;strokeColor=#000000;" value="&lt;u&gt;HospitalID&lt;/u&gt;" vertex="1">
+          <mxGeometry height="40" width="115" x="1190" y="550" as="geometry" />
+        </mxCell>
+        <mxCell id="att_hosp_name" parent="1" style="ellipse;whiteSpace=wrap;html=1;fontSize=12;fillColor=#FFFFFF;strokeColor=#000000;" value="name" vertex="1">
+          <mxGeometry height="40" width="115" x="1190" y="600" as="geometry" />
+        </mxCell>
+        <mxCell id="att_hosp_city" parent="1" style="ellipse;whiteSpace=wrap;html=1;fontSize=12;fillColor=#FFFFFF;strokeColor=#000000;" value="city" vertex="1">
+          <mxGeometry height="40" width="115" x="1190" y="650" as="geometry" />
+        </mxCell>
+        <mxCell id="att_hosp_type" parent="1" style="ellipse;whiteSpace=wrap;html=1;fontSize=12;fillColor=#FFFFFF;strokeColor=#000000;" value="type" vertex="1">
+          <mxGeometry height="40" width="115" x="1190" y="700" as="geometry" />
+        </mxCell>
+        <mxCell id="att_hosp_emerg" parent="1" style="ellipse;whiteSpace=wrap;html=1;fontSize=11;fillColor=#FFFFFF;strokeColor=#000000;" value="emergencyAvailable" vertex="1">
+          <mxGeometry height="40" width="135" x="1180" y="750" as="geometry" />
+        </mxCell>
+        <mxCell id="edge_h_id" edge="1" parent="1" source="ent_hospital" style="endArrow=none;html=1;strokeColor=#000000;" target="att_hosp_id">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="edge_h_name" edge="1" parent="1" source="ent_hospital" style="endArrow=none;html=1;strokeColor=#000000;" target="att_hosp_name">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="edge_h_city" edge="1" parent="1" source="ent_hospital" style="endArrow=none;html=1;strokeColor=#000000;" target="att_hosp_city">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="edge_h_type" edge="1" parent="1" source="ent_hospital" style="endArrow=none;html=1;strokeColor=#000000;" target="att_hosp_type">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="edge_h_em" edge="1" parent="1" source="ent_hospital" style="endArrow=none;html=1;strokeColor=#000000;" target="att_hosp_emerg">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="rel_owns_rec" parent="1" style="shape=rhombus;whiteSpace=wrap;html=1;fontSize=13;fontStyle=1;fillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.2;" value="Owns" vertex="1">
+          <mxGeometry height="60" width="100" x="380" y="520" as="geometry" />
+        </mxCell>
+        <mxCell id="edge_u_owns" edge="1" parent="1" source="ent_user" style="endArrow=none;html=1;strokeColor=#000000;fontSize=12;fontStyle=1;entryX=1;entryY=0.5;entryDx=0;entryDy=0;" target="rel_owns_rec" value="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="rel_updates_rec" parent="1" style="shape=rhombus;whiteSpace=wrap;html=1;fontSize=13;fontStyle=1;fillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.2;" value="Updates" vertex="1">
+          <mxGeometry height="60" width="100" x="830" y="470" as="geometry" />
+        </mxCell>
+        <mxCell id="edge_doc_upd" edge="1" parent="1" source="ent_doctor" style="endArrow=none;html=1;strokeColor=#000000;fontSize=12;fontStyle=1;" target="rel_updates_rec" value="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="ent_record" parent="1" style="shape=rectangle;whiteSpace=wrap;html=1;fontSize=15;fontStyle=1;fillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;" value="Medical-Record" vertex="1">
+          <mxGeometry height="65" width="160" x="540" y="630" as="geometry" />
+        </mxCell>
+        <mxCell id="edge_owns_rec" edge="1" parent="1" source="rel_owns_rec" style="endArrow=none;html=1;strokeColor=#000000;fontSize=12;fontStyle=1;" target="ent_record" value="N">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="edge_upd_rec" edge="1" parent="1" source="rel_updates_rec" style="endArrow=none;html=1;strokeColor=#000000;fontSize=12;fontStyle=1;" target="ent_record" value="N">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="att_rec_id" parent="1" style="ellipse;whiteSpace=wrap;html=1;fontSize=12;fillColor=#FFFFFF;strokeColor=#000000;" value="&lt;u&gt;RecordID&lt;/u&gt;" vertex="1">
+          <mxGeometry height="40" width="115" x="360" y="620" as="geometry" />
+        </mxCell>
+        <mxCell id="att_rec_title" parent="1" style="ellipse;whiteSpace=wrap;html=1;fontSize=12;fillColor=#FFFFFF;strokeColor=#000000;" value="title" vertex="1">
+          <mxGeometry height="40" width="115" x="360" y="670" as="geometry" />
+        </mxCell>
+        <mxCell id="att_rec_cat" parent="1" style="ellipse;whiteSpace=wrap;html=1;fontSize=12;fillColor=#FFFFFF;strokeColor=#000000;" value="category" vertex="1">
+          <mxGeometry height="40" width="115" x="360" y="720" as="geometry" />
+        </mxCell>
+        <mxCell id="att_rec_date" parent="1" style="ellipse;whiteSpace=wrap;html=1;fontSize=12;fillColor=#FFFFFF;strokeColor=#000000;" value="recordDate" vertex="1">
+          <mxGeometry height="40" width="115" x="360" y="770" as="geometry" />
+        </mxCell>
+        <mxCell id="att_rec_notes" parent="1" style="ellipse;whiteSpace=wrap;html=1;fontSize=12;fillColor=#FFFFFF;strokeColor=#000000;" value="clinicalNotes" vertex="1">
+          <mxGeometry height="40" width="115" x="500" y="730" as="geometry" />
+        </mxCell>
+        <mxCell id="att_rec_file" parent="1" style="ellipse;whiteSpace=wrap;html=1;fontSize=12;fillColor=#FFFFFF;strokeColor=#000000;" value="fileUrl" vertex="1">
+          <mxGeometry height="40" width="115" x="630" y="730" as="geometry" />
+        </mxCell>
+        <mxCell id="edge_r_id" edge="1" parent="1" source="ent_record" style="endArrow=none;html=1;strokeColor=#000000;" target="att_rec_id">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="edge_r_title" edge="1" parent="1" source="ent_record" style="endArrow=none;html=1;strokeColor=#000000;" target="att_rec_title">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="edge_r_cat" edge="1" parent="1" source="ent_record" style="endArrow=none;html=1;strokeColor=#000000;" target="att_rec_cat">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="edge_r_date" edge="1" parent="1" source="ent_record" style="endArrow=none;html=1;strokeColor=#000000;" target="att_rec_date">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="edge_r_notes" edge="1" parent="1" source="ent_record" style="endArrow=none;html=1;strokeColor=#000000;" target="att_rec_notes">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="edge_r_file" edge="1" parent="1" source="ent_record" style="endArrow=none;html=1;strokeColor=#000000;" target="att_rec_file">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="rel_prescribes" parent="1" style="shape=rhombus;whiteSpace=wrap;html=1;fontSize=13;fontStyle=1;fillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.2;" value="Prescribes" vertex="1">
+          <mxGeometry height="60" width="100" x="840" y="770" as="geometry" />
+        </mxCell>
+        <mxCell id="edge_d_presc" edge="1" parent="1" source="ent_doctor" style="endArrow=none;html=1;strokeColor=#000000;fontSize=12;fontStyle=1;" target="rel_prescribes" value="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="att_rel_issued_date" parent="1" style="ellipse;whiteSpace=wrap;html=1;fontSize=12;fillColor=#FFFFFF;strokeColor=#000000;" value="issuedDate" vertex="1">
+          <mxGeometry height="40" width="105" x="980" y="780" as="geometry" />
+        </mxCell>
+        <mxCell id="edge_rel_att_date" edge="1" parent="1" source="rel_prescribes" style="endArrow=none;html=1;strokeColor=#000000;" target="att_rel_issued_date">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="ent_rx" parent="1" style="shape=rectangle;whiteSpace=wrap;html=1;fontSize=15;fontStyle=1;fillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;" value="Prescription" vertex="1">
+          <mxGeometry height="65" width="160" x="810" y="890" as="geometry" />
+        </mxCell>
+        <mxCell id="edge_presc_rx" edge="1" parent="1" source="rel_prescribes" style="endArrow=none;html=1;strokeColor=#000000;fontSize=12;fontStyle=1;" target="ent_rx" value="N">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="edge_user_rx" edge="1" parent="1" source="ent_user" style="endArrow=none;html=1;strokeColor=#000000;fontSize=12;fontStyle=1;exitX=1;exitY=0.25;exitDx=0;exitDy=0;entryX=0.25;entryY=0;entryDx=0;entryDy=0;" target="ent_rx" value="N">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="att_rx_id" parent="1" style="ellipse;whiteSpace=wrap;html=1;fontSize=11;fillColor=#FFFFFF;strokeColor=#000000;" value="&lt;u&gt;PrescriptionID&lt;/u&gt;" vertex="1">
+          <mxGeometry height="40" width="115" x="660" y="990" as="geometry" />
+        </mxCell>
+        <mxCell id="att_rx_diag" parent="1" style="ellipse;whiteSpace=wrap;html=1;fontSize=12;fillColor=#FFFFFF;strokeColor=#000000;" value="diagnosis" vertex="1">
+          <mxGeometry height="40" width="105" x="785" y="990" as="geometry" />
+        </mxCell>
+        <mxCell id="att_rx_duration" parent="1" style="ellipse;whiteSpace=wrap;html=1;fontSize=12;fillColor=#FFFFFF;strokeColor=#000000;" value="duration" vertex="1">
+          <mxGeometry height="40" width="105" x="900" y="990" as="geometry" />
+        </mxCell>
+        <mxCell id="att_rx_active" parent="1" style="ellipse;whiteSpace=wrap;html=1;fontSize=12;fillColor=#FFFFFF;strokeColor=#000000;" value="isActive" vertex="1">
+          <mxGeometry height="40" width="100" x="1015" y="990" as="geometry" />
+        </mxCell>
+        <mxCell id="att_rx_meds" parent="1" style="shape=doubleEllipse;whiteSpace=wrap;html=1;fontSize=12;fillColor=#FFFFFF;strokeColor=#000000;" value="medicines" vertex="1">
+          <mxGeometry height="40" width="110" x="1015" y="920" as="geometry" />
+        </mxCell>
+        <mxCell id="edge_rx_id" edge="1" parent="1" source="ent_rx" style="endArrow=none;html=1;strokeColor=#000000;" target="att_rx_id">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="edge_rx_diag" edge="1" parent="1" source="ent_rx" style="endArrow=none;html=1;strokeColor=#000000;" target="att_rx_diag">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="edge_rx_dur" edge="1" parent="1" source="ent_rx" style="endArrow=none;html=1;strokeColor=#000000;" target="att_rx_duration">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="edge_rx_act" edge="1" parent="1" source="ent_rx" style="endArrow=none;html=1;strokeColor=#000000;" target="att_rx_active">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="edge_rx_meds" edge="1" parent="1" source="ent_rx" style="endArrow=none;html=1;strokeColor=#000000;" target="att_rx_meds">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="rel_applies_loan" parent="1" style="shape=rhombus;whiteSpace=wrap;html=1;fontSize=13;fontStyle=1;fillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.2;" value="Applies-For" vertex="1">
+          <mxGeometry height="60" width="100" x="210" y="770" as="geometry" />
+        </mxCell>
+        <mxCell id="edge_u_loan" edge="1" parent="1" source="ent_user" style="endArrow=none;html=1;strokeColor=#000000;fontSize=12;fontStyle=1;entryX=0.1;entryY=0.333;entryDx=0;entryDy=0;entryPerimeter=0;exitX=0.109;exitY=1.001;exitDx=0;exitDy=0;exitPerimeter=0;" target="rel_applies_loan" value="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="att_rel_applied_date" parent="1" style="ellipse;whiteSpace=wrap;html=1;fontSize=12;fillColor=#FFFFFF;strokeColor=#000000;" value="appliedDate" vertex="1">
+          <mxGeometry height="40" width="105" x="70" y="780" as="geometry" />
+        </mxCell>
+        <mxCell id="edge_rel_app_date" edge="1" parent="1" source="rel_applies_loan" style="endArrow=none;html=1;strokeColor=#000000;" target="att_rel_applied_date">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="ent_loan" parent="1" style="shape=rectangle;whiteSpace=wrap;html=1;fontSize=15;fontStyle=1;fillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;" value="Loan-Application" vertex="1">
+          <mxGeometry height="65" width="160" x="180" y="890" as="geometry" />
+        </mxCell>
+        <mxCell id="edge_app_loan" edge="1" parent="1" source="rel_applies_loan" style="endArrow=none;html=1;strokeColor=#000000;fontSize=12;fontStyle=1;" target="ent_loan" value="N">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="att_loan_id" parent="1" style="ellipse;whiteSpace=wrap;html=1;fontSize=12;fillColor=#FFFFFF;strokeColor=#000000;" value="&lt;u&gt;LoanID&lt;/u&gt;" vertex="1">
+          <mxGeometry height="40" width="115" x="30" y="880" as="geometry" />
+        </mxCell>
+        <mxCell id="att_loan_req" parent="1" style="ellipse;whiteSpace=wrap;html=1;fontSize=11;fillColor=#FFFFFF;strokeColor=#000000;" value="amountRequested" vertex="1">
+          <mxGeometry height="40" width="115" x="30" y="930" as="geometry" />
+        </mxCell>
+        <mxCell id="att_loan_app" parent="1" style="ellipse;whiteSpace=wrap;html=1;fontSize=11;fillColor=#FFFFFF;strokeColor=#000000;" value="approvedAmount" vertex="1">
+          <mxGeometry height="40" width="115" x="30" y="980" as="geometry" />
+        </mxCell>
+        <mxCell id="att_loan_ml" parent="1" style="ellipse;whiteSpace=wrap;html=1;fontSize=12;fillColor=#FFFFFF;strokeColor=#000000;" value="mlScore" vertex="1">
+          <mxGeometry height="40" width="105" x="150" y="1000" as="geometry" />
+        </mxCell>
+        <mxCell id="att_loan_stat" parent="1" style="ellipse;whiteSpace=wrap;html=1;fontSize=12;fillColor=#FFFFFF;strokeColor=#000000;" value="status" vertex="1">
+          <mxGeometry height="40" width="105" x="270" y="1000" as="geometry" />
+        </mxCell>
+        <mxCell id="edge_l_id" edge="1" parent="1" source="ent_loan" style="endArrow=none;html=1;strokeColor=#000000;" target="att_loan_id">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="edge_l_req" edge="1" parent="1" source="ent_loan" style="endArrow=none;html=1;strokeColor=#000000;" target="att_loan_req">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="edge_l_app" edge="1" parent="1" source="ent_loan" style="endArrow=none;html=1;strokeColor=#000000;" target="att_loan_app">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="edge_l_ml" edge="1" parent="1" source="ent_loan" style="endArrow=none;html=1;strokeColor=#000000;" target="att_loan_ml">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="edge_l_stat" edge="1" parent="1" source="ent_loan" style="endArrow=none;html=1;strokeColor=#000000;" target="att_loan_stat">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

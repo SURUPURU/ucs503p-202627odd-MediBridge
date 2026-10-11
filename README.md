@@ -264,9 +264,9 @@ Shows the main interactions between the Patient, Doctor, and MediBridge system.
 
 Shows the main entities and relationships used by the MediBridge database.
 
-**Expected file:** `docs/diagrams/er_diagram/er.png`
+**File:** `docs/diagrams/er_diagram/er.png`
 
-> **Placeholder:** The `docs/diagrams/er_diagram/` folder currently contains only `.gitkeep`. Add the ER diagram image here later.
+![MediBridge ER Diagram](docs/diagrams/er_diagram/er.png)
 
 
 ### Main Entities
@@ -562,6 +562,4 @@ Documentation
 **Stage:** MVP / Mid-semester development
 
 **Team Members:** Suryansh Pahuja & Kunal Motwani
-
-> ER image placeholder is intentionally kept because that folder is currently empty except for `.gitkeep`.
 
