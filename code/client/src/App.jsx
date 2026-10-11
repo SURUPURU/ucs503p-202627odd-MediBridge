@@ -40,11 +40,12 @@ import MyPatients from './pages/doctor/MyPatients';
 
 // Public Pages
 import EmergencyPublic from './pages/emergency/EmergencyPublic';
+import Landing from './pages/public/Landing';
 
 const App = () => {
   return (
     <Routes>
-      <Route path="/" element={<Navigate to="/login" replace />} />
+      <Route path="/" element={<Landing />} />
       <Route path="/login" element={<Login />} />
       <Route path="/register" element={<Register />} />
       <Route path="/register/doctor" element={<DoctorRegister />} />
