@@ -54,9 +54,10 @@ const FindPatient = () => {
 
     try {
       setVerifying(true);
-      await doctorService.requestAccess({ healthId: patient.healthId, accessPin: fullPin });
+      const targetHealthId = patient.healthId || healthId;
+      await doctorService.requestAccess({ healthId: targetHealthId, accessPin: fullPin });
       toast.success('Access granted for 24 hours');
-      navigate(`/doctor/patient/${patient.healthId}/add-record`);
+      navigate(`/doctor/patient/${targetHealthId}/add-record`);
     } catch (error) {
       toast.error(error.response?.data?.message || 'Invalid PIN. Access denied.');
     } finally {
