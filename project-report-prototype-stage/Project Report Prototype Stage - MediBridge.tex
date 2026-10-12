@@ -210,6 +210,64 @@ The overall design therefore preserves the proposal's separation between
 presentation, business logic, and persistence while adding a separate
 service boundary for the financial prediction component.
 
+ \section{System Diagrams}
+
+The following diagrams document the main workflows and data movement in the
+current MediBridge prototype. Image paths are relative to this report file.
+
+\subsection{Activity Diagram}
+
+Figure~\ref{fig:activity-diagram} summarizes the main patient workflow through
+registration, login, and the available MediBridge services.
+
+\begin{figure}[p]
+  \centering
+  \includegraphics[width=\textwidth,height=0.78\textheight,keepaspectratio]{../docs/diagrams/activity_diagram/activity_diagram.png}
+  \caption{MediBridge activity diagram}
+  \label{fig:activity-diagram}
+\end{figure}
+
+\subsection{Data Flow Diagrams}
+
+The Level 0 diagram shows MediBridge as a single process interacting with
+the patient, doctor, and ML prediction service. The Level 1 diagram expands
+the system into its major processes and data stores. Level 2 diagrams provide
+more detail for the financial-assistance workflow and the medical-records and
+doctor-access workflow.
+
+\begin{figure}[p]
+  \centering
+  \includegraphics[width=\textwidth,height=0.78\textheight,keepaspectratio]{../docs/diagrams/data_flow_diagram/level0.png}
+  \caption{DFD Level 0: MediBridge context diagram}
+  \label{fig:dfd-level-0}
+\end{figure}
+
+\begin{figure}[p]
+  \centering
+  \includegraphics[width=\textwidth,height=0.78\textheight,keepaspectratio]{../docs/diagrams/data_flow_diagram/level1_overall.png}
+  \caption{DFD Level 1: Overall MediBridge processes and data stores}
+  \label{fig:dfd-level-1}
+\end{figure}
+
+\begin{figure}[p]
+  \centering
+  \includegraphics[width=\textwidth,height=0.78\textheight,keepaspectratio]{../docs/diagrams/data_flow_diagram/level2_financial_ml.png}
+  \caption{DFD Level 2: Financial assistance and ML prediction}
+  \label{fig:dfd-level-2-financial}
+\end{figure}
+
+\begin{figure}[p]
+  \centering
+  \includegraphics[width=\textwidth,height=0.78\textheight,keepaspectratio]{../docs/diagrams/data_flow_diagram/level2_medical_records.png}
+  \caption{DFD Level 2: Medical records and doctor access}
+  \label{fig:dfd-level-2-records}
+\end{figure}
+
+The ER and use-case diagram directories currently contain only placeholder
+files in the repository, so those figures cannot yet be included. They can be
+added here once their image files are committed.
+
+
 \subsection{Technical Stack}
 
 \begin{itemize}
