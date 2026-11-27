@@ -1,139 +1,140 @@
-# 🏛️ MediBridge: Technical Architecture Specification
+# MediBridge Architecture and Repository Map
 
-> **ABDM & DPDP Compliant Zero-Trust Health Data Exchange, Ambient Scribe & Diagnostic Copilot**
+## 1. System overview
 
----
+MediBridge is a prototype healthcare workflow platform composed of three runnable application services:
 
-## 1. System Overview
+1. **React/Vite client** — patient and doctor interfaces.
+2. **Node.js/Express API** — authentication, healthcare resources, workflow controllers, persistence, and integrations.
+3. **Python/FastAPI EvidenceScribe** — a separate clinical-documentation service.
 
-MediBridge is designed as a modular, privacy-preserving healthcare operating platform. It aligns with the **Ayushman Bharat Digital Mission (ABDM)** specification for Health Information Users (HIU) and Health Information Providers (HIP), as well as India's **Digital Personal Data Protection Act (DPDP 2023)**.
+The repository also includes external AI integrations, a Cloudinary integration, deployment manifests, seed data, and automated checks. This description is based on the current `main` branch source layout; implementation files are authoritative.
 
-```
-+-------------------------------------------------------------------------+
-|                         CLIENT PRESENTATION TIER                        |
-|                                                                         |
-|  [Doctor Portal]           [Patient Health Vault]     [Ambient Scribe]  |
-|  - Patient Search          - ABDM Health ID           - Whisper Voice   |
-|  - Grok AI Summarizer      - Granular Consent Matrix  - Indic Diarizer  |
-|  - HF Diagnostic Copilot   - Emergency Public QR      - SOAP Note Gen   |
-|  - Digital Prescription    - Medical Crowdfunding     - Safety Locks    |
-+------------------------------------+------------------------------------+
-                                     │
-                     REST API & Bearer JWT Sessions
-                                     ▼
-+-------------------------------------------------------------------------+
-|                         APPLICATION GATEWAY TIER                        |
-|                                                                         |
-|  - Helmet Security Headers         - Cookie Parser & CORS               |
-|  - Express 4.x Microservices       - Global ApiError Handler            |
-+------------------------------------+------------------------------------+
-                                     │
-                                     ▼
-+-------------------------------------------------------------------------+
-|                       ZERO-TRUST CONSENT GATEWAY                        |
-|                                                                         |
-|  - accessMiddleware (Enforces Patient Consent Policies)                 |
-|  - Granular Masking Filter (Standard, Sensitive, Confidential, Masked)  |
-|  - 4-Digit Master PIN Challenge & 30-Day TTL Session Enforcement        |
-+------------------------------------+------------------------------------+
-                                     │
-          ┌──────────────────────────┴──────────────────────────┐
-          ▼                                                     ▼
-+----------------------------------+  +----------------------------------+
-|      CLINICAL AI & ML ENGINES    |  |     PERSISTENCE & DATA STORAGE   |
-|                                  |  |                                  |
-| 1. Grok / Groq Fast Summarizer   |  | 1. In-Memory MongoDB Engine      |
-|    - openai/gpt-oss-120b         |  |    - Zero-setup local boot       |
-|    - qwen/qwen3.8-27b            |  |    - Persistent MongoDB URI opt  |
-| 2. Hugging Face Copilot          |  | 2. Document & Image Storage      |
-|    - Bio_ClinicalBERT            |  |    - Cloudinary Authenticated    |
-|    - ICD-10 Classification Engine|  |    - Local Diagnostic Fallback   |
-| 3. Ambient Scribe Pipeline       |  | 3. Tamper-Proof Audit Logging    |
-|    - Groq Whisper Large-v3       |  |    - AccessLog tracking          |
-|    - Indic Language Token Lock   |  |    - ConsentGrant state history  |
-+----------------------------------+  +----------------------------------+
+This is an academic/demo prototype. The repository does not establish formal ABDM certification or legal DPDP compliance.
+
+## 2. Technology stack
+
+| Area | Technology | Source |
+|---|---|---|
+| Frontend | React 19, Vite, React Router, Zustand, Axios, Tailwind CSS | `client/package.json` |
+| Backend | Node.js, Express 5, Mongoose | `server/package.json` |
+| Persistence | MongoDB / Mongoose; optional in-memory MongoDB for local/demo use | `server/src/config/db.js` |
+| Scribe | Python, FastAPI, Pydantic | `services/scribe/app.py`, `requirements.txt` |
+| AI integrations | Groq-compatible summarization / ASR and Hugging Face diagnostic-support integration | `server/src/services/`, `services/scribe/` |
+| File storage | Cloudinary SDK integration | `server/src/config/cloudinary.js` |
+| Hosting configuration | Vercel and Render | `vercel.json`, `render.yaml` |
+
+## 3. High-level component diagram
+
+```mermaid
+flowchart TB
+  Patient[Patient browser] --> Web[React + Vite client]
+  Doctor[Doctor browser] --> Web
+  Web -->|REST /api/v1| API[Express API]
+  API --> Auth[Authentication and role middleware]
+  API --> Controllers[Resource controllers]
+  Controllers --> Models[Mongoose models]
+  Models --> DB[(MongoDB)]
+  Controllers --> Storage[Cloudinary integration]
+  Controllers --> AI[Clinical AI service modules]
+  AI --> Groq[Groq-compatible provider]
+  AI --> HF[Hugging Face provider]
+  Web -->|Scribe URL| Scribe[FastAPI EvidenceScribe]
+  Scribe --> ASR[Configured speech-to-text provider]
+  Scribe --> LLM[Configured generation / verifier providers]
 ```
 
----
+## 4. Backend modules
 
-## 2. Zero-Trust Consent State Machine
+Express setup and route mounting are in `server/src/app.js`. The health endpoint is `GET /api/v1/health`.
 
-Under DPDP 2023 and ABDM standards, health data cannot be shared without explicit patient consent.
+Current mounted route prefixes:
 
-### Consent Lifecycle
-1. **Consent Initialization**: Doctor requests patient access via their universal Health ID (`MB-2026-487139`).
-2. **Patient Authentication**: Patient enters their 4-digit Master PIN (`1234`) or grants consent via the patient dashboard.
-3. **Session Provisioning**: A cryptographically signed `AccessSession` document is stored with:
-   - `doctorId`: MongoDB ObjectId of the authenticated physician.
-   - `patientId`: MongoDB ObjectId of the consenting patient.
-   - `scopeType`: `all` vs `selective` (allowed categories: lab_report, imaging, discharge_summary).
-   - `excludeSensitive`: Boolean flag withholding psychiatric or strictly confidential files.
-   - `expiresAt`: 30-day Time-To-Live (TTL).
-4. **Dynamic Query Enforcement**: When `GET /api/v1/doctors/patients/:healthId/records` is queried, `accessMiddleware` injects privacy constraints directly into the MongoDB query:
-   ```javascript
-   const query = { userId: patient._id };
-   if (session.scopeType === 'selective') {
-     query.category = { $in: session.allowedCategories };
-   }
-   if (session.excludeSensitive) {
-     query.sensitivity = { $nin: ['sensitive', 'strictly_confidential'] };
-     query.isMaskedByPatient = { $ne: true };
-   }
-   ```
-5. **Instant Revocation**: At any time, the patient can revoke consent from `/access-log`, terminating the session immediately.
+| Prefix | Responsibility |
+|---|---|
+| `/api/v1/auth` | Authentication |
+| `/api/v1/profile` | Patient profile |
+| `/api/v1/hospitals` | Hospital discovery and details |
+| `/api/v1/records` | Medical records |
+| `/api/v1/document-access` | Document access permissions |
+| `/api/v1/prescriptions` | Prescriptions |
+| `/api/v1/doctors` | Doctor and patient clinical workflows |
+| `/api/v1/access` | Consent/access sessions and logs |
+| `/api/v1/financial` | Loan workflow |
+| `/api/v1/fundraisers` | Fundraising and donations |
+| `/api/v1/emergency` | Emergency information |
+| `/api/v1/mock/hospital` | Mock hospital integration |
+| `/api/v1/appointments` | Appointment workflow |
 
----
+Route files under `server/src/routes/` define exact methods and endpoints. Controllers handle requests; Mongoose schemas under `server/src/models/` define persisted entities. Authentication, role checks, access enforcement, validation, upload handling, and error handling live under `server/src/middleware/` and `server/src/validators/`.
 
-## 3. Dual-Tier Clinical Artificial Intelligence
+## 5. Data model inventory
 
-### Tier A: Grok / Groq Fast AI Clinical Summarizer
-- **Purpose**: Digest voluminous EHR histories (prescriptions, discharge summaries, lab tests) into an actionable executive summary in under 2 seconds.
-- **Service**: [`server/src/services/aiSummarizerService.js`](file:///C:/Users/DELL/Downloads/city%20aiiii/MediBridge-Final/server/src/services/aiSummarizerService.js)
-- **Model Execution**:
-  - Primary: `openai/gpt-oss-120b` on Groq Cloud Inference (~250 tokens/sec).
-  - Secondary: `qwen/qwen3.8-27b` fast fallback.
-  - Offline Engine: Deterministic clinical rule extractor mapping drug timings, lab baseline changes, and Penicillin allergy contraindications.
+Model files currently include:
 
-### Tier B: Hugging Face Clinical Diagnostic Decision Support
-- **Purpose**: Correlate presenting complaints with abnormal biomarkers to calculate differential diagnoses.
-- **Service**: [`server/src/services/hfDiagnosticService.js`](file:///C:/Users/DELL/Downloads/city%20aiiii/MediBridge-Final/server/src/services/hfDiagnosticService.js)
-- **Model Pipeline**:
-  - Model: `emilyalsentzer/Bio_ClinicalBERT` / Open-Weights Medical LLM.
-  - Ontological Mapping: Maps natural language conditions to official **ICD-10 codes** (e.g. `E11.9`, `I11.9`, `E78.2`).
-  - Output Structure: Differential diagnoses ranked by confidence match bar (50% to 98%), supporting biomarker alignment, and recommended diagnostic workups.
+- `User`, `Doctor`, `Hospital`
+- `MedicalRecord`, `Prescription`
+- `AccessSession`, `AccessLog`, `ConsentGrant`, `DocumentAccessPermission`
+- `EmergencyProfile`
+- `Appointment`
+- `LoanApplication`
+- `FundraiserCampaign`, `Donation`
 
-### Tier C: Ambient Clinical Scribe
-- **Service**: [`services/scribe/app.py`](file:///C:/Users/DELL/Downloads/city%20aiiii/MediBridge-Final/services/scribe/app.py) (FastAPI on Port 8000).
-- **Speech-to-Text**: Groq Cloud `whisper-large-v3` (<1s transcription latency).
-- **Indic Language Diarization**: Supports English, Hindi, Hinglish, Marathi, Bengali, Tamil, Telugu with exact token-locking on drug dosages and numeric vitals to eliminate hallucination risk.
+Refer to each schema for actual fields, indexes, validation, and relationships. This inventory is not a substitute for the schema definitions.
 
----
+## 6. Frontend organization
 
-## 4. API Endpoints Specification
+- `client/src/pages/auth/`: login and registration.
+- `client/src/pages/dashboard/`: patient and doctor dashboards and appointments.
+- `client/src/pages/doctor/`: patient search, record review, record creation, prescriptions, and clinical scribe UI.
+- `client/src/pages/records/`: record listing, detail, upload, and access management.
+- `client/src/pages/hospitals/`: hospital search, detail, and appointment booking.
+- `client/src/pages/access/`: access log.
+- `client/src/pages/emergency/` and `client/src/pages/profile/`: emergency and profile/health ID workflows.
+- `client/src/pages/financial/` and `client/src/pages/fundraiser/`: financial support workflows.
+- `client/src/services/`: API calls grouped by resource.
+- `client/src/routes/`: protected and role-aware route wrappers.
 
-### Authentication & Consent
-| Method | Endpoint | Description |
-| :--- | :--- | :--- |
-| `POST` | `/api/v1/auth/login` | JWT Authentication (Doctor & Patient) |
-| `GET` | `/api/v1/health` | Service health status check |
-| `POST` | `/api/v1/doctors/patients/access` | Verify patient PIN & activate AccessSession |
-| `GET` | `/api/v1/doctors/patients/:healthId/session-status` | Check consent validity |
+The shared Axios instance is `client/src/services/api.js`. It reads `VITE_API_URL`, adds `/api/v1` when needed, and sends credentials.
 
-### Clinical Records & AI Intelligence
-| Method | Endpoint | Description |
-| :--- | :--- | :--- |
-| `GET` | `/api/v1/doctors/patients/:healthId/records` | Fetch zero-trust filtered medical records |
-| `GET` | `/api/v1/doctors/patients/:healthId/ai-summary` | Generate Grok clinical history summary |
-| `POST` | `/api/v1/doctors/patients/:healthId/suggest-diagnosis` | Run Hugging Face Diagnostic Copilot |
-| `GET` | `/api/v1/doctors/patients/:healthId/prescriptions` | Retrieve previous prescriptions |
-| `POST` | `/api/v1/doctors/patients/:healthId/prescriptions` | Issue digitally signed prescription |
-| `GET` | `/api/v1/records/ai-summary` | Patient's own health & lab summary |
+## 7. Consent and access control
 
----
+The repository contains dedicated access and document-access route/controller/model modules, plus authentication and access middleware. Trace the implementation through the route, controller, middleware, model, and tests in `server/tests/`.
 
-## 5. Security & Threat Modeling
+Do not describe the prototype as formally ABDM-certified or legally compliant solely because it implements consent/access features.
 
-1. **Authentication**: Signed HTTP-only cookies and Bearer tokens utilizing dual-secret JWT rotation.
-2. **Data Minimization**: In compliant mode, file URLs and cloud public IDs are stripped from API responses unless a specific authenticated file download token is verified.
-3. **Penicillin & Adverse Drug Reaction Safety**: Documented allergies in the patient's Emergency Profile trigger hard validation warnings in both the prescription writer and the diagnostic copilot, preventing inadvertent beta-lactam prescription.
-4. **Draw.io Architectural Diagram**: View the complete interactive schema in [`docs/medibridge_flowchart.drawio`](file:///C:/Users/DELL/Downloads/city%20aiiii/MediBridge-Final/docs/medibridge_flowchart.drawio).
+## 8. Clinical AI and EvidenceScribe
+
+Backend AI modules:
+- `server/src/services/aiSummarizerService.js`: clinical history summarization integration.
+- `server/src/services/hfDiagnosticService.js`: diagnostic-support integration.
+- `server/src/services/loanPredictionService.js` and `server/src/utils/loanEligibility.js`: financial eligibility workflow logic.
+
+Model availability, output quality, and latency depend on configuration and runtime. Avoid fixed performance claims without reproducible live evaluation.
+
+EvidenceScribe's root entry point is `services/scribe/app.py`, launched by the repository start scripts. It is a separate FastAPI service focused on evidence-linked note generation and review. Configuration and dependencies are in `services/scribe/.env.example` and `services/scribe/requirements.txt`.
+
+The `services/scribe/backend/` subtree contains an additional EvidenceScribe implementation and its own documentation/data. The root launcher does not start its nested `backend/app.py`.
+
+## 9. Runtime and deployment
+
+| Service | Local port | Start command |
+|---|---:|---|
+| Client | 5173 | `cd client && npm run dev` |
+| Express API | 5000 | `cd server && npm start` |
+| EvidenceScribe | 8000 | `cd services/scribe && python app.py serve` |
+
+The Windows, PowerShell, and shell launchers start these services separately. Install dependencies and configure environment files first.
+
+Root `vercel.json` builds the client and serves `client/dist`. Root `render.yaml` defines the Node API and Python scribe services. Configure `VITE_API_URL`, `VITE_SCRIBE_URL`, and backend `CLIENT_URL` for deployed origins. Use persistent MongoDB for data that must survive restarts; in-memory storage is temporary.
+
+See [Deployment Guide](DEPLOYMENT_GUIDE.md).
+
+## 10. Verification
+
+- Backend: `cd server && npm test`
+- Frontend: `cd client && npm run build && npm run lint`
+- Scribe: `cd services/scribe && python app.py selftest`
+- Full local integration check: `python scripts/verify_platform.py` (requires services running)
+
+A passing check confirms only the paths it exercises. It is not a security assessment, clinical validation, or regulatory certification.
