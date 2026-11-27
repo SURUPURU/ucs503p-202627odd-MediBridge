@@ -9,7 +9,7 @@
 
 ---
 
-## 💡 The Human Story: Why We Built MediBridge
+## 💡 The Human Story: Why We Built MediBridge  aa
 
 In India and across global healthcare systems, an outpatient consultation typically lasts **3 to 5 minutes**. 
 
