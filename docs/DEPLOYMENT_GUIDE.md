@@ -1,86 +1,76 @@
-# 🚀 MediBridge 2.0 — Production Deployment Guide
+# MediBridge Deployment Guide
 
-This guide walks you through deploying MediBridge to **Render** (Backend API & Ambient Scribe) and **Vercel** (Frontend UI) for free.
+The current repository configures Vercel for the React/Vite client and Render for the Express API and FastAPI EvidenceScribe service.
 
----
+## 1. Before deployment
 
-## 🏗️ Architecture Overview
+- Push the intended code to GitHub `main`.
+- Confirm the client builds: `cd client && npm run build`.
+- Confirm the API starts and `GET /api/v1/health` responds.
+- Confirm the scribe starts: `python app.py serve`.
+- Prepare production secrets and a persistent MongoDB connection string.
+- Use synthetic data for public demonstrations.
 
-```
-                      ┌───────────────────────────────────────┐
-                      │          Vercel (Frontend)            │
-                      │   https://medibridge.vercel.app       │
-                      └──────────────────┬────────────────────┘
-                                         │
-                    ┌────────────────────┴────────────────────┐
-                    ▼                                         ▼
-   ┌─────────────────────────────────┐       ┌─────────────────────────────────┐
-   │       Render Web Service 1      │       │       Render Web Service 2      │
-   │         medibridge-api          │       │        medibridge-scribe        │
-   │  https://...onrender.com/api/v1 │       │      https://...onrender.com    │
-   │      (Node.js / Express)        │       │       (Python / FastAPI)        │
-   └─────────────────────────────────┘       └─────────────────────────────────┘
-```
+## 2. Render: API and scribe
 
----
+The root `render.yaml` defines two services:
 
-## Part 1: Deploy Backend & Scribe on Render (Free)
+| Service | Runtime | Root directory | Build | Start |
+|---|---|---|---|---|
+| `medibridge-api` | Node | `server` | `npm install` | `node server.js` |
+| `medibridge-scribe` | Python | `services/scribe` | `pip install -r requirements.txt` | `python app.py serve` |
 
-Render reads the root `render.yaml` specification and automatically provisions both web services.
+1. Create a Render Blueprint and connect `SURUPURU/ucs503p-202627odd-MediBridge`.
+2. Select `main` and let Render read the root `render.yaml`.
+3. Review the two service root directories and build/start commands.
+4. Configure secrets and environment values in the Render dashboard.
+5. Deploy and record both public service URLs.
 
-### Steps:
-1. Go to **[dashboard.render.com](https://dashboard.render.com)** and sign in with GitHub (`SURUPURU`).
-2. Click **"New +"** in the top navigation bar and select **"Blueprint"**.
-3. Connect your repository: **`SURUPURU/ucs503p-202627odd-MediBridge`** (branch: `main`).
-4. Render will detect `render.yaml` and show 2 services:
-   - `medibridge-api` (Node.js web service)
-   - `medibridge-scribe` (Python web service)
-5. Under Environment Variables, fill in your secrets:
-   - **`GROQ_API_KEY`**: Your Groq API key (used for fast clinical history summaries and Whisper speech transcription).
-   - **`HF_API_TOKEN`**: (Optional) Your HuggingFace token for Bio_ClinicalBERT differential diagnosis.
-   - **`CLIENT_URL`**: Leave blank for now (or set to `*`), update it after Vercel gives you your frontend URL.
-6. Click **"Apply"**. Render will build and deploy both services!
-7. Once deployed, note down your two service URLs:
-   - Example Backend: `https://medibridge-api.onrender.com`
-   - Example Scribe: `https://medibridge-scribe.onrender.com`
+### API environment
 
----
+The Blueprint declares `PORT`, `NODE_ENV`, generated JWT secrets, `MONGO_URI`, `CLIENT_URL`, Groq settings, Hugging Face settings, and Cloudinary credentials.
 
-## Part 2: Deploy Frontend on Vercel (Free)
+Set `MONGO_URI` to a persistent MongoDB connection for data persistence. Set `CLIENT_URL` to the exact deployed frontend origin. Configure provider credentials only when those integrations are enabled. Do not use example JWT secrets in production.
 
-### Steps:
-1. Go to **[vercel.com](https://vercel.com)** and sign in with GitHub (`SURUPURU` or `kunal-motwani`).
-2. Click **"Add New..."** → **"Project"**.
-3. Select your repository: **`ucs503p-202627odd-MediBridge`**.
-4. In the Project Configuration:
-   - **Framework Preset**: `Vite`
-   - **Root Directory**: Click *Edit* and select **`client`** (or leave as root since `vercel.json` is configured).
-5. Open **Environment Variables** and add:
-   | Key | Value | Description |
-   | :--- | :--- | :--- |
-   | **`VITE_API_URL`** | `https://medibridge-api.onrender.com` | Your Render Backend API URL |
-   | **`VITE_SCRIBE_URL`** | `https://medibridge-scribe.onrender.com` | Your Render Scribe URL |
-6. Click **"Deploy"**. Vercel will install dependencies, build with Vite, and assign you a live HTTPS domain (e.g., `https://medibridge-five.vercel.app`).
+### Scribe environment
 
----
+The Blueprint declares `HOST=0.0.0.0`, `GROQ_API_KEY`, `ASR_PROVIDER=openai_compatible`, and `PYTHONIOENCODING=utf-8`. Review `services/scribe/.env.example` and `services/scribe/app.py` for additional settings. Demo fixtures must not be presented as live inference.
 
-## Part 3: Connect Frontend & Backend CORS
+## 3. Vercel: frontend
 
-1. Return to the **Render Dashboard** → click `medibridge-api` → **Environment**.
-2. Update **`CLIENT_URL`** with your exact Vercel frontend URL:
-   ```
-   CLIENT_URL=https://medibridge-five.vercel.app
-   ```
-3. Click **"Save Changes"**. Render will automatically restart the backend with CORS configured for your live site.
+The root `vercel.json` specifies Vite, the build command, output directory, and SPA rewrite.
 
----
+1. Import `SURUPURU/ucs503p-202627odd-MediBridge` into Vercel.
+2. Keep the project root at the repository root so the root `vercel.json` is used.
+3. Confirm build command `cd client && npm install && npm run build`.
+4. Confirm output directory `client/dist`.
+5. Add:
 
-## ✅ Verification Checklist
+| Variable | Value |
+|---|---|
+| `VITE_API_URL` | Public base URL of the Render API |
+| `VITE_SCRIBE_URL` | Public base URL of the Render scribe service |
 
-- [ ] Open your live Vercel URL in your browser.
-- [ ] Log in with demo credentials:
-  - Doctor: `doctor@demo.com` / `password123`
-  - Patient: `patient@demo.com` / `password123` (PIN: `1234`)
-- [ ] Test AI Clinical Summary (Grok sub-second extraction).
-- [ ] Test Diagnostic Decision Copilot (Bio_ClinicalBERT ICD-10 suggestions).
-- [ ] Test Ambient Scribe (voice microphone capture & live SOAP generation).
+The API helper appends `/api/v1` to `VITE_API_URL` if needed. Values prefixed with `VITE_` are browser-visible; never put secrets there.
+
+## 4. CORS and connectivity
+
+Set the API's `CLIENT_URL` to the exact Vercel origin and restart/redeploy the API. Verify browser requests and credential behavior. The current Express app enables credentialed CORS with a permissive origin callback; review and restrict this policy to trusted origins before production use.
+
+## 5. Verify the deployment
+
+- Open the Vercel URL and confirm the application loads.
+- Open `https://YOUR_API_HOST/api/v1/health` and confirm the health response.
+- Open the scribe service URL and confirm it responds.
+- Test login and key workflows using synthetic accounts/data.
+- Test record access, appointments, prescriptions, emergency profile, and financial/fundraiser workflows.
+- Test AI functions only when provider credentials are configured.
+- Review Vercel and Render logs for startup, environment, CORS, and API errors.
+
+## 6. Production limitations
+
+- Local `mongodb-memory-server` data is temporary.
+- Demo credentials and seeded records are for demonstration only; disable or replace them on a public deployment.
+- Current CORS settings need tightening.
+- Add monitoring, backups, rate-limit review, secret rotation, access-control testing, and a security assessment before handling sensitive data.
+- A successful deployment does not establish ABDM certification, DPDP compliance, or clinical safety.
