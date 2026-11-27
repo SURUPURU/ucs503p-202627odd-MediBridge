@@ -12,8 +12,9 @@ const protect = asyncHandler(async (req, res, next) => {
   if (!token) throw new ApiError(401, 'Not authorized');
 
   let decoded;
+  const secret = process.env.JWT_SECRET || 'medibridge_production_secret_key_hackathon_2026';
   try {
-    decoded = jwt.verify(token, process.env.JWT_SECRET);
+    decoded = jwt.verify(token, secret);
   } catch {
     throw new ApiError(401, 'Token expired or invalid');
   }
