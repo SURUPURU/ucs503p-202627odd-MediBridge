@@ -1,0 +1,215 @@
+<mxfile host="app.diagrams.net">
+  <diagram id="79jMFG6NtyCA-KyVppOg" name="Page-1">
+    <mxGraphModel dx="448" dy="265" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1654" pageHeight="1169" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="title" parent="1" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=18;fontStyle=1;fontColor=#1a237e;" value="MediBridge 2.0 — Collaboration &amp; Architecture Diagram" vertex="1">
+          <mxGeometry height="40" width="1000" x="327" y="20" as="geometry" />
+        </mxCell>
+        <mxCell id="swim_actors" parent="1" style="swimlane;startSize=30;fillColor=#e8f5e9;strokeColor=#388e3c;fontStyle=1;fontSize=12;fontColor=#1b5e20;" value="ACTORS" vertex="1">
+          <mxGeometry height="520" width="180" x="30" y="80" as="geometry" />
+        </mxCell>
+        <mxCell id="actor_patient" parent="swim_actors" style="rounded=1;whiteSpace=wrap;fillColor=#c8e6c9;strokeColor=#388e3c;fontStyle=1;fontSize=11;" value="🧑 Patient / Citizen" vertex="1">
+          <mxGeometry height="50" width="140" x="20" y="60" as="geometry" />
+        </mxCell>
+        <mxCell id="actor_doctor" parent="swim_actors" style="rounded=1;whiteSpace=wrap;fillColor=#c8e6c9;strokeColor=#388e3c;fontStyle=1;fontSize=11;" value="👨‍⚕️ Doctor / Clinician" vertex="1">
+          <mxGeometry height="50" width="140" x="20" y="150" as="geometry" />
+        </mxCell>
+        <mxCell id="actor_paramedic" parent="swim_actors" style="rounded=1;whiteSpace=wrap;fillColor=#c8e6c9;strokeColor=#388e3c;fontStyle=1;fontSize=11;" value="🚑 Emergency Paramedic" vertex="1">
+          <mxGeometry height="50" width="140" x="20" y="240" as="geometry" />
+        </mxCell>
+        <mxCell id="actor_system" parent="swim_actors" style="rounded=1;whiteSpace=wrap;fillColor=#c8e6c9;strokeColor=#388e3c;fontStyle=1;fontSize=11;" value="🖥️ System Admin / ABDM" vertex="1">
+          <mxGeometry height="50" width="140" x="20" y="330" as="geometry" />
+        </mxCell>
+        <mxCell id="swim_frontend" parent="1" style="swimlane;startSize=30;fillColor=#e3f2fd;strokeColor=#1565c0;fontStyle=1;fontSize=12;fontColor=#0d47a1;" value="FRONTEND — React 18 + Vite (Port 5173)" vertex="1">
+          <mxGeometry height="780" width="330" x="240" y="80" as="geometry" />
+        </mxCell>
+        <mxCell id="fe_landing" parent="swim_frontend" style="rounded=1;whiteSpace=wrap;fillColor=#bbdefb;strokeColor=#1565c0;fontSize=10;" value="🏠 Landing Page&#xa;(Public Route)" vertex="1">
+          <mxGeometry height="45" width="290" x="20" y="50" as="geometry" />
+        </mxCell>
+        <mxCell id="fe_login" parent="swim_frontend" style="rounded=1;whiteSpace=wrap;fillColor=#bbdefb;strokeColor=#1565c0;fontSize=10;" value="🔐 Login / Auth Page&#xa;JWT Cookie Session" vertex="1">
+          <mxGeometry height="45" width="290" x="20" y="115" as="geometry" />
+        </mxCell>
+        <mxCell id="fe_patient" parent="swim_frontend" style="rounded=1;whiteSpace=wrap;fillColor=#bbdefb;strokeColor=#1565c0;fontSize=10;align=left;" value="🩺 Patient Health Vault&#xa;• 4-Tier Privacy Matrix Toggles&#xa;• Active Session Inspector&#xa;• 1-Tap Consent Revocation&#xa;• Access Audit Log" vertex="1">
+          <mxGeometry height="90" width="290" x="20" y="180" as="geometry" />
+        </mxCell>
+        <mxCell id="fe_doctor" parent="swim_frontend" style="rounded=1;whiteSpace=wrap;fillColor=#bbdefb;strokeColor=#1565c0;fontSize=10;align=left;" value="Doctor Dashboard&#xa;• Patient Search by Health ID&#xa;• Consent PIN Challenge&#xa;• Medical Records Viewer&#xa;• Digital Prescription Pad" vertex="1">
+          <mxGeometry height="90" width="290" x="20" y="290" as="geometry" />
+        </mxCell>
+        <mxCell id="fe_ai" parent="swim_frontend" style="rounded=1;whiteSpace=wrap;fillColor=#bbdefb;strokeColor=#1565c0;fontSize=10;align=left;" value="  AI Summarizer Panel&#xa;• Grok Clinical History View&#xa;• ICD-10 Differential Diagnosis&#xa;• Biomarker Trend Charts&#xa;• 1-Click Adopt &amp; Prescribe" vertex="1">
+          <mxGeometry height="90" width="290" x="20" y="400" as="geometry" />
+        </mxCell>
+        <mxCell id="fe_scribe" parent="swim_frontend" style="rounded=1;whiteSpace=wrap;fillColor=#bbdefb;strokeColor=#1565c0;fontSize=10;align=left;" value=" Ambient Scribe Panel&#xa;• HTML5 MediaRecorder API&#xa;• Real-Time Audio Streaming&#xa;• Live SOAP Note Viewer&#xa;• Multilingual Output Toggle" vertex="1">
+          <mxGeometry height="90" width="290" x="20" y="510" as="geometry" />
+        </mxCell>
+        <mxCell id="fe_emergency" parent="swim_frontend" style="rounded=1;whiteSpace=wrap;fillColor=#ffcdd2;strokeColor=#c62828;fontSize=10;align=left;" value="Emergency QR Card&#xa;• Public Trauma Telemetry&#xa;• No Login Required&#xa;• Blood Group + Allergy Alert" vertex="1">
+          <mxGeometry height="75" width="290" x="20" y="620" as="geometry" />
+        </mxCell>
+        <mxCell id="fe_tailwind" parent="swim_frontend" style="rounded=1;whiteSpace=wrap;fillColor=#e1f5fe;strokeColor=#0288d1;fontSize=9;" value="🎨 Tailwind CSS + Lucide Icons + QRCode.react" vertex="1">
+          <mxGeometry height="35" width="290" x="20" y="715" as="geometry" />
+        </mxCell>
+        <mxCell id="swim_backend" parent="1" style="swimlane;startSize=30;fillColor=#fff3e0;strokeColor=#e65100;fontStyle=1;fontSize=12;fontColor=#bf360c;" value="BACKEND — Node.js / Express REST API (Port 5000)" vertex="1">
+          <mxGeometry height="780" width="340" x="600" y="80" as="geometry" />
+        </mxCell>
+        <mxCell id="be_helmet" parent="swim_backend" style="rounded=1;whiteSpace=wrap;fillColor=#ffe0b2;strokeColor=#e65100;fontSize=10;" value="🛡️ Helmet.js Security Headers&#xa;CSP • HSTS • X-Frame-Options • XSS" vertex="1">
+          <mxGeometry height="50" width="300" x="20" y="50" as="geometry" />
+        </mxCell>
+        <mxCell id="be_cors" parent="swim_backend" style="rounded=1;whiteSpace=wrap;fillColor=#ffe0b2;strokeColor=#e65100;fontSize=10;" value="🌐 CORS + Cookie-Parser&#xa;HttpOnly • SameSite=Strict • Credentials" vertex="1">
+          <mxGeometry height="50" width="300" x="20" y="115" as="geometry" />
+        </mxCell>
+        <mxCell id="be_auth" parent="swim_backend" style="rounded=1;whiteSpace=wrap;fillColor=#ffe0b2;strokeColor=#e65100;fontSize=10;align=left;" value="🔑 JWT Dual-Token Auth&#xa;• Access Token (15-min TTL)&#xa;• Refresh Token (7-day TTL)&#xa;• Bcrypt Password Hashing" vertex="1">
+          <mxGeometry height="80" width="300" x="20" y="180" as="geometry" />
+        </mxCell>
+        <mxCell id="be_consent" parent="swim_backend" style="rounded=1;whiteSpace=wrap;fillColor=#ffcc80;strokeColor=#e65100;fontSize=10;align=left;fontStyle=1;" value="🔒 Zero-Trust Consent Gateway&#xa;(accessMiddleware.js)&#xa;• ABAC 4-Tier Privacy Enforcement&#xa;• 4-Digit PIN Challenge (TTL: 30 days)&#xa;• Real-Time 1-Tap Revocation&#xa;• MongoDB Query Injection Filters" vertex="1">
+          <mxGeometry height="110" width="300" x="20" y="275" as="geometry" />
+        </mxCell>
+        <mxCell id="be_routes" parent="swim_backend" style="rounded=1;whiteSpace=wrap;fillColor=#ffe0b2;strokeColor=#e65100;fontSize=10;align=left;" value="📡 API Routes (12 Microservices)&#xa;/auth  /records  /doctors  /prescriptions&#xa;/access  /emergency  /appointments&#xa;/hospitals  /fundraisers  /financial" vertex="1">
+          <mxGeometry height="80" width="300" x="20" y="400" as="geometry" />
+        </mxCell>
+        <mxCell id="be_ai_proxy" parent="swim_backend" style="rounded=1;whiteSpace=wrap;fillColor=#ffe0b2;strokeColor=#e65100;fontSize=10;align=left;" value="🤖 AI Proxy Services&#xa;aiSummarizerService.js (Groq)&#xa;hfDiagnosticService.js (HF API)" vertex="1">
+          <mxGeometry height="70" width="300" x="20" y="495" as="geometry" />
+        </mxCell>
+        <mxCell id="be_db" parent="swim_backend" style="rounded=1;whiteSpace=wrap;fillColor=#fff9c4;strokeColor=#f57f17;fontSize=10;align=left;" value="  MongoDB (In-Memory / Atlas)&#xa;Mongoose ODM — Schemas:&#xa;User • MedicalRecord • AccessSession&#xa;AuditLog • EmergencyProfile • Prescription" vertex="1">
+          <mxGeometry height="80" width="300" x="20" y="580" as="geometry" />
+        </mxCell>
+        <mxCell id="be_seed" parent="swim_backend" style="rounded=1;whiteSpace=wrap;fillColor=#f3e5f5;strokeColor=#6a1b9a;fontSize=10;" value="Auto-Seed Engine&#xa;Demo data injected on cold start" vertex="1">
+          <mxGeometry height="45" width="300" x="20" y="675" as="geometry" />
+        </mxCell>
+        <mxCell id="be_cloudinary" parent="swim_backend" style="rounded=1;whiteSpace=wrap;fillColor=#e8eaf6;strokeColor=#283593;fontSize=10;" value="☁️ Cloudinary CDN (Image / PDF Uploads)" vertex="1">
+          <mxGeometry height="35" width="300" x="20" y="730" as="geometry" />
+        </mxCell>
+        <mxCell id="oZ-2P5jgEzAg4bhqPsrU-3" edge="1" parent="1" source="swim_ai" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=1;exitDx=0;exitDy=0;defaultLabelBackgroundColor=page;">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="1310" y="539.9999999999998" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="swim_ai" parent="1" style="swimlane;startSize=30;fillColor=#fce4ec;strokeColor=#880e4f;fontStyle=1;fontSize=12;fontColor=#880e4f;" value="AI MICROSERVICES — Python FastAPI (Port 8000)" vertex="1">
+          <mxGeometry height="490" width="357" x="970" y="80" as="geometry" />
+        </mxCell>
+        <mxCell id="ai_fastapi" parent="swim_ai" style="rounded=1;whiteSpace=wrap;fillColor=#f8bbd0;strokeColor=#880e4f;fontSize=10;" value="⚡ FastAPI + Uvicorn&#xa;Async Python ASGI Framework&#xa;Pydantic Schema Validation" vertex="1">
+          <mxGeometry height="60" width="300" x="20" y="50" as="geometry" />
+        </mxCell>
+        <mxCell id="ai_groq" parent="swim_ai" style="rounded=1;whiteSpace=wrap;fillColor=#f48fb1;strokeColor=#880e4f;fontSize=10;align=left;fontStyle=1;" value="⚡ Groq LPU Inference Engine&#xa;Model: openai/gpt-oss-120b&#xa;Fallback: qwen/qwen3.8-27b&#xa;Speed: ~250–500 tokens/sec&#xa;Latency: &lt; 2 seconds end-to-end" vertex="1">
+          <mxGeometry height="90" width="300" x="20" y="130" as="geometry" />
+        </mxCell>
+        <mxCell id="ai_bert" parent="swim_ai" style="rounded=1;whiteSpace=wrap;fillColor=#f48fb1;strokeColor=#880e4f;fontSize=10;align=left;" value="🧠 Bio_ClinicalBERT (HuggingFace)&#xa;emilyalsentzer/Bio_ClinicalBERT&#xa;• Fine-tuned on MIMIC-III&#xa;• ICD-10 Ontological Mapping&#xa;• Confidence Match Scoring" vertex="1">
+          <mxGeometry height="90" width="300" x="20" y="240" as="geometry" />
+        </mxCell>
+        <mxCell id="ai_whisper" parent="swim_ai" style="rounded=1;whiteSpace=wrap;fillColor=#f48fb1;strokeColor=#880e4f;fontSize=10;align=left;" value="🎙️ Whisper Large-v3 (Groq ASR)&#xa;• Sub-second transcription&#xa;• 7 Indic language support&#xa;• Deterministic Token-Locking&#xa;• FFmpeg 9.0 Audio Normalizer" vertex="1">
+          <mxGeometry height="90" width="300" x="20" y="350" as="geometry" />
+        </mxCell>
+        <mxCell id="swim_external" parent="1" style="swimlane;startSize=30;fillColor=#e8f5e9;strokeColor=#2e7d32;fontStyle=1;fontSize=12;fontColor=#1b5e20;" value="EXTERNAL APIs &amp; COMPLIANCE STANDARDS" vertex="1">
+          <mxGeometry height="260" width="340" x="1370" y="607.5" as="geometry" />
+        </mxCell>
+        <mxCell id="ext_groq" parent="swim_external" style="rounded=1;whiteSpace=wrap;fillColor=#c8e6c9;strokeColor=#2e7d32;fontSize=10;" value="Groq Cloud API&#xa;api.groq.com/openai/v1" vertex="1">
+          <mxGeometry height="50" width="140" x="20" y="50" as="geometry" />
+        </mxCell>
+        <mxCell id="ext_hf" parent="swim_external" style="rounded=1;whiteSpace=wrap;fillColor=#c8e6c9;strokeColor=#2e7d32;fontSize=10;" value=" HuggingFace API&#xa;api-inference.huggingface.co" vertex="1">
+          <mxGeometry height="50" width="140" x="175" y="50" as="geometry" />
+        </mxCell>
+        <mxCell id="ext_abdm" parent="swim_external" style="rounded=1;whiteSpace=wrap;fillColor=#c8e6c9;strokeColor=#2e7d32;fontSize=10;" value=" ABDM Standard&#xa;Ayushman Bharat DM&#xa;HIP / HIU Spec" vertex="1">
+          <mxGeometry height="60" width="140" x="20" y="120" as="geometry" />
+        </mxCell>
+        <mxCell id="ext_dpdp" parent="swim_external" style="rounded=1;whiteSpace=wrap;fillColor=#c8e6c9;strokeColor=#2e7d32;fontSize=10;" value=" DPDP Act 2023&#xa;Data Protection&#xa;Consent Compliance" vertex="1">
+          <mxGeometry height="60" width="140" x="175" y="120" as="geometry" />
+        </mxCell>
+        <mxCell id="ext_cloudinary" parent="swim_external" style="rounded=1;whiteSpace=wrap;fillColor=#c8e6c9;strokeColor=#2e7d32;fontSize=10;" value="☁️ Cloudinary CDN&#xa;Encrypted Media Storage&#xa;Signed URL Access" vertex="1">
+          <mxGeometry height="45" width="295" x="20" y="195" as="geometry" />
+        </mxCell>
+        <mxCell id="swim_devops" parent="1" style="swimlane;startSize=30;fillColor=#ede7f6;strokeColor=#4527a0;fontStyle=1;fontSize=12;fontColor=#4527a0;" value="DEVOPS &amp; TEST HARNESS" vertex="1">
+          <mxGeometry height="150" width="1070" x="240" y="890" as="geometry" />
+        </mxCell>
+        <mxCell id="dev_verify" parent="swim_devops" style="rounded=1;whiteSpace=wrap;fillColor=#d1c4e9;strokeColor=#4527a0;fontSize=10;" value="🧪 verify_platform.py&#xa;7-Step Auto Test Suite" vertex="1">
+          <mxGeometry height="70" width="190" x="20" y="45" as="geometry" />
+        </mxCell>
+        <mxCell id="dev_start" parent="swim_devops" style="rounded=1;whiteSpace=wrap;fillColor=#d1c4e9;strokeColor=#4527a0;fontSize=10;" value="🚀 start_all.ps1 / .bat / .sh&#xa;One-Command Orchestration" vertex="1">
+          <mxGeometry height="70" width="190" x="225" y="45" as="geometry" />
+        </mxCell>
+        <mxCell id="dev_github" parent="swim_devops" style="rounded=1;whiteSpace=wrap;fillColor=#d1c4e9;strokeColor=#4527a0;fontSize=10;" value="🐙 GitHub&#xa;kunal-motwani/MediBridge-Final&#xa;Clean Commits + .gitignore" vertex="1">
+          <mxGeometry height="70" width="190" x="430" y="45" as="geometry" />
+        </mxCell>
+        <mxCell id="dev_ffmpeg" parent="swim_devops" style="rounded=1;whiteSpace=wrap;fillColor=#d1c4e9;strokeColor=#4527a0;fontSize=10;" value="🎬 FFmpeg 9.0&#xa;Audio Transcoding Pipeline" vertex="1">
+          <mxGeometry height="70" width="190" x="635" y="45" as="geometry" />
+        </mxCell>
+        <mxCell id="dev_mongo" parent="swim_devops" style="rounded=1;whiteSpace=wrap;fillColor=#d1c4e9;strokeColor=#4527a0;fontSize=10;" value="🗄️ mongodb-memory-server&#xa;Zero-Setup In-Memory DB" vertex="1">
+          <mxGeometry height="70" width="190" x="840" y="45" as="geometry" />
+        </mxCell>
+        <mxCell id="e1" edge="1" parent="1" source="actor_patient" style="edgeStyle=orthogonalEdgeStyle;strokeColor=#388e3c;strokeWidth=2;exitX=1;exitY=0.5;entryX=0;entryY=0.5;" target="fe_patient" value="Login / Register">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e2" edge="1" parent="1" source="actor_doctor" style="edgeStyle=orthogonalEdgeStyle;strokeColor=#388e3c;strokeWidth=2;" target="fe_doctor" value="Patient Search + PIN">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e3" edge="1" parent="1" source="actor_paramedic" style="edgeStyle=orthogonalEdgeStyle;strokeColor=#c62828;strokeWidth=2;" target="fe_emergency" value="QR Scan">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e4" edge="1" parent="1" source="fe_login" style="edgeStyle=orthogonalEdgeStyle;strokeColor=#1565c0;strokeWidth=2.5;fontStyle=1;" target="be_auth" value="REST / HTTP&#xa;Bearer JWT">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e5" edge="1" parent="1" source="fe_doctor" style="edgeStyle=orthogonalEdgeStyle;strokeColor=#1565c0;strokeWidth=2;" target="be_consent" value="POST /doctors/patients/access&#xa;(PIN Challenge)">
+          <mxGeometry relative="1" x="-1" y="-5" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e6" edge="1" parent="1" source="fe_ai" style="edgeStyle=orthogonalEdgeStyle;strokeColor=#1565c0;strokeWidth=2;" target="be_ai_proxy" value="GET /records + /ai-summary&#xa;/suggest-diagnosis">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e7" edge="1" parent="1" source="fe_patient" style="edgeStyle=orthogonalEdgeStyle;strokeColor=#1565c0;strokeWidth=2;" target="be_routes" value="POST /records (upload)">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e8" edge="1" parent="1" source="fe_emergency" style="edgeStyle=orthogonalEdgeStyle;strokeColor=#c62828;strokeWidth=2;" target="be_routes" value="GET /emergency/:healthId">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e9" edge="1" parent="1" source="fe_scribe" style="edgeStyle=orthogonalEdgeStyle;strokeColor=#880e4f;strokeWidth=2.5;dashed=1;" target="ai_whisper" value="POST /api/transcribe&#xa;(raw WAV audio)">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e10" edge="1" parent="1" source="be_routes" style="edgeStyle=orthogonalEdgeStyle;strokeColor=#f57f17;strokeWidth=2;" target="be_db" value="Mongoose ODM&#xa;Read / Write">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e11" edge="1" parent="1" source="be_consent" style="edgeStyle=orthogonalEdgeStyle;strokeColor=#e65100;strokeWidth=2.5;fontStyle=1;" target="be_db" value="Consent Filter&#xa;Query Injection">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e12" edge="1" parent="1" source="be_ai_proxy" style="edgeStyle=orthogonalEdgeStyle;strokeColor=#880e4f;strokeWidth=2;" target="ai_groq" value="HTTP POST (Groq API)&#xa;Clinical Summary Request">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e13" edge="1" parent="1" source="be_ai_proxy" style="edgeStyle=orthogonalEdgeStyle;strokeColor=#880e4f;strokeWidth=2;" target="ai_bert" value="HTTP POST (HF API)&#xa;Diagnostic Inference">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e14" edge="1" parent="1" source="ai_groq" style="edgeStyle=orthogonalEdgeStyle;strokeColor=#2e7d32;strokeWidth=2;dashed=1;" target="ext_groq" value="HTTPS / OpenAI-compat API">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e15" edge="1" parent="1" source="ai_bert" style="edgeStyle=orthogonalEdgeStyle;strokeColor=#2e7d32;strokeWidth=2;dashed=1;" target="ext_hf" value="HTTPS Inference API">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e16" edge="1" parent="1" source="ai_whisper" style="edgeStyle=orthogonalEdgeStyle;strokeColor=#2e7d32;strokeWidth=2;dashed=1;" target="ext_groq" value="Groq Whisper&#xa;ASR Cloud">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e17" edge="1" parent="1" source="be_cloudinary" style="edgeStyle=orthogonalEdgeStyle;strokeColor=#2e7d32;strokeWidth=2;dashed=1;" target="ext_cloudinary" value="Signed URL Upload">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e18" edge="1" parent="1" source="ext_abdm" style="edgeStyle=orthogonalEdgeStyle;strokeColor=#2e7d32;strokeWidth=1.5;dashed=1;" target="be_consent" value="ABDM-compliant&#xa;Health ID schema">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e19" edge="1" parent="1" source="ext_dpdp" style="edgeStyle=orthogonalEdgeStyle;strokeColor=#2e7d32;strokeWidth=1.5;dashed=1;" target="be_consent" value="DPDP 2023&#xa;Consent rules">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="legend_box" parent="1" style="swimlane;startSize=30;fillColor=#f5f5f5;strokeColor=#616161;fontStyle=1;fontSize=11;" value="DATA SENSITIVITY TIERS (DPDP 2023)" vertex="1">
+          <mxGeometry height="200" width="180" x="30" y="650" as="geometry" />
+        </mxCell>
+        <mxCell id="leg1" parent="legend_box" style="rounded=1;whiteSpace=wrap;fillColor=#c8e6c9;strokeColor=#388e3c;fontSize=10;" value="🟢 Standard&#xa;(Lab, Vitals)" vertex="1">
+          <mxGeometry height="35" width="160" x="10" y="40" as="geometry" />
+        </mxCell>
+        <mxCell id="leg2" parent="legend_box" style="rounded=1;whiteSpace=wrap;fillColor=#fff9c4;strokeColor=#f9a825;fontSize=10;" value="🟡 Sensitive&#xa;(Cardio, Chronic)" vertex="1">
+          <mxGeometry height="35" width="160" x="10" y="85" as="geometry" />
+        </mxCell>
+        <mxCell id="leg3" parent="legend_box" style="rounded=1;whiteSpace=wrap;fillColor=#ffcdd2;strokeColor=#c62828;fontSize=10;" value="🔴 Confidential&#xa;(Psych, Repro)" vertex="1">
+          <mxGeometry height="35" width="160" x="10" y="130" as="geometry" />
+        </mxCell>
+        <mxCell id="leg4" parent="legend_box" style="rounded=1;whiteSpace=wrap;fillColor=#eeeeee;strokeColor=#212121;fontSize=10;" value="⬛ Masked&#xa;(Patient-Redacted)" vertex="1">
+          <mxGeometry height="35" width="160" x="10" y="175" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

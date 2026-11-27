@@ -44,3 +44,7 @@ Thumbs.db
 scratch/
 tmp/
 temp/
+
+# Scribe session runtime data
+services/scribe/data/sessions/
+services/scribe/data/audio/
