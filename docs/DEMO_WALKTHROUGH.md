@@ -1,93 +1,86 @@
-# 🧭 MediBridge: 4-Minute Judge Demo Walkthrough
+# MediBridge Demo Walkthrough
 
-This guide provides hackathon judges, evaluators, and reviewers with a step-by-step clickpath to experience every major capability of MediBridge in under 4 minutes.
+This is a suggested evaluation path through workflows represented in the current repository. UI labels and demo data may change; use the running application and current seed code as the source of truth.
 
----
+## 1. Start the services
 
-## ⚡ Fast Setup (If Not Already Running)
+Install dependencies and configure environment files as described in the root [README](../README.md). Start three terminals:
 
-1. Double-click `start_all.bat` (or run `./start_all.sh` on Mac/Linux).
-2. Wait 5 seconds for services to initialize:
-   - **Client**: `http://localhost:5173`
-   - **Backend**: `http://localhost:5000`
-   - **Ambient Scribe**: `http://localhost:8000`
-3. Verify all systems with:
-   ```bash
-   python scripts/verify_platform.py
-   ```
+```bash
+cd server && npm run dev
+```
 
----
+```bash
+cd client && npm run dev
+```
 
-## 🎬 Step-by-Step Clinical Demo Flow
+```bash
+cd services/scribe && python app.py serve
+```
 
-### Phase 1: Doctor Login & Zero-Trust Patient Access (1 Minute)
-1. Open your browser and navigate to: **[http://localhost:5173/login](http://localhost:5173/login)**
-2. Sign in with Doctor Credentials:
-   - **Email**: `doctor@demo.com`
-   - **Password**: `password123`
-3. Click **"Find Patient"** on the left sidebar.
-4. Click the prominent green card: **"Select Demo Patient: Rahul Sharma (MB-2026-487139, PIN: 1234)"**.
-5. Observe how Dr. Sharma is immediately granted access to Rahul's authorized clinical vault without friction.
+Alternatively, use `start_all.bat`, `start_all.ps1`, or `start_all.sh` after setup.
 
----
+- Client: http://localhost:5173
+- API health: http://localhost:5000/api/v1/health
+- Scribe: http://localhost:8000
 
-### Phase 2: Grok AI Medical Summarizer (1 Minute)
-1. You are now on Rahul Sharma's records page: `http://localhost:5173/doctor/patient/MB-2026-487139/records`.
-2. Notice the **Grok AI Clinical Summarizer** card at the top:
-   - **Executive Clinical Trajectory**: Read the 2-sentence clinical summary of Rahul's diabetes and hypertension control.
-   - Click the **"Prescriptions & Medicines"** tab: View active medications (*Metformin 500mg*, *Amlodipine 5mg*) and historical courses (*Azithromycin 500mg* from prior bronchitis).
-   - Click the **"Lab Reports & Trends"** tab: Inspect the structured metrics (*HbA1c: 7.1% Improved*, *Cholesterol 185 Normal*, *Echocardiogram Concentric LVH*).
-   - Click the **"Allergies & Safety"** tab: Notice the bold red warning: `CRITICAL: Documented Penicillin Allergy`.
-   - Click **"Copy Summary"**: The complete clinical synthesis is copied to your clipboard ready for EHR notes!
+## 2. Suggested application walkthrough
 
----
+1. Sign in using a demo account created by `server/seed/autoSeed.js`; confirm current credentials in that file.
+2. Explore the doctor dashboard and patient search.
+3. Review patient records and the record-access / consent workflow.
+4. Inspect record details and the prescription workflow.
+5. Explore hospital search and appointment booking.
+6. Open the patient profile and emergency profile workflow.
+7. Explore the loan application and fundraiser/donation features.
+8. Open the clinical scribe workflow and use only synthetic or role-played audio.
 
-### Phase 3: Hugging Face Clinical Diagnostic Copilot & Prescription (1 Minute)
-1. In the top action bar of the records page, click the orange button: **"🤗 HF Diagnostic Copilot"**.
-2. A clinical decision support modal appears:
-   - Notice Rahul's chronic conditions, lab values, and allergies are **automatically correlated**.
-   - Under presenting symptoms, click the symptom chips:
-     - `Increased Thirst (Polydipsia)`
-     - `Frequent Urination (Nocturia)`
-     - `Blurred Vision`
-     - `Morning Dizziness`
-   - Click **"🤗 Run Hugging Face Diagnostic Analysis"**.
-3. In under 2 seconds, `Bio_ClinicalBERT` renders:
-   - **Top Differential Diagnosis**: *Uncontrolled Type 2 Diabetes Mellitus with Osmotic Diuresis* (`ICD-10: E11.9`) with a **95% Match bar**.
-   - **Biomarker Correlation**: Shows how HbA1c 7.1% and concentric LVH directly justify the finding.
-   - **Confirmatory Workup**: Recommends *7-Day CGM* and *24h Ambulatory BP Monitoring*.
-4. Click the green button: **"Adopt & Prescribe"** on the top diagnosis.
-5. You are redirected to **Issue Digital Prescription** with the diagnosis and ICD-10 code automatically pre-filled!
-6. Click the quick drug preset **"+ Atorvastatin 10 mg"** and click **"Issue & Sign Prescription"**.
+## 3. Clinical AI
 
----
+The backend contains separate modules for clinical history summarization and diagnostic support:
 
-### Phase 4: Ambient AI Scribe (45 Seconds)
-1. From the sidebar or records page, click **"AI Clinical Scribe"**.
-2. Click **"Start Voice Dictation"** to test live Groq Whisper Large-v3 speech-to-text.
-3. Speak into your microphone (e.g. *"Patient reports elevated blood sugars after dinner, blood pressure is 134 over 86"*).
-4. Watch the sub-second transcript stream in real time and populate the clinical encounter!
+- `server/src/services/aiSummarizerService.js`
+- `server/src/services/hfDiagnosticService.js`
 
----
+Availability and output depend on provider credentials, model availability, and network access. These are assistive features, not a diagnosis or prescription. A clinician must independently verify all clinical information.
 
-### Phase 5: Patient Privacy & Emergency QR (30 Seconds)
-1. Log out from the top right user menu.
-2. Sign in with Patient Credentials:
-   - **Email**: `patient@demo.com`
-   - **Password**: `password123`
-3. Click **"Medical Records"** on the sidebar:
-   - Click **"✨ Grok AI Summary"** to see how the patient views their own plain-English health explanation.
-   - Click the privacy badge on any record to toggle between `Standard`, `Sensitive`, or `Masked`.
-4. Click **"Emergency Profile"** on the sidebar:
-   - View the scannable **Life-Saving Emergency QR Code** displaying blood group (O+), severe Penicillin allergy, and emergency contacts for first responders!
+## 4. EvidenceScribe demonstration
 
----
+The root scribe service at `services/scribe/app.py` includes a demo mode and offline checks. Demo fixture output is labelled and must not be represented as live model output.
 
-### Summary Checklist for Judges
+Suggested sequence:
+1. Start the scribe service.
+2. Load the bundled synthetic demo consultation in its UI.
+3. Inspect the transcript and extracted assertions.
+4. Review the generated note and its evidence references.
+5. Inspect verification and omission flags.
+6. Run:
 
-- [x] Zero-Trust Consent gating works flawlessly without random ID lockouts.
-- [x] Grok AI parses prescriptions, medicines taken, and lab trends in ~2 seconds.
-- [x] Hugging Face Copilot correlates symptoms with lab findings and ICD-10 codes.
-- [x] 1-Click diagnostic adoption smoothly populates digital prescriptions.
-- [x] Groq Whisper Large-v3 transcribes consultation speech in sub-second latency.
-- [x] Patient maintains complete ABDM/DPDP control over data masking and emergency QR.
+```bash
+cd services/scribe
+python app.py selftest
+python app.py smoke
+python app.py eval
+```
+
+The bundled `data/eval_report.md` says its demo pipeline rows are fixture-based and that baseline/live runs remain required. State this limitation clearly during evaluation.
+
+## 5. Verification commands
+
+```bash
+# Backend
+cd server
+npm test
+
+# Frontend
+cd client
+npm run build
+npm run lint
+
+# Full platform check (from repository root, with services running)
+python scripts/verify_platform.py
+```
+
+## 6. Demo safety
+
+Use synthetic accounts, synthetic medical records, and role-played consultation audio only. Do not use real patient data. MediBridge is a project prototype, not a certified medical device or a replacement for clinical judgement.
