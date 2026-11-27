@@ -1,0 +1,56 @@
+services:
+  # ─── 1. Node.js Backend API ───────────────────────────────────────────────
+  - type: web
+    name: medibridge-api
+    env: node
+    plan: free
+    rootDir: server
+    buildCommand: npm install
+    startCommand: node server.js
+    envVars:
+      - key: PORT
+        value: 5000
+      - key: NODE_ENV
+        value: production
+      - key: JWT_SECRET
+        generateValue: true
+      - key: JWT_REFRESH_SECRET
+        generateValue: true
+      - key: MONGO_URI
+        value: ""          # Leave empty to use auto in-memory MongoDB, or paste a MongoDB Atlas URI
+      - key: CLIENT_URL
+        sync: false        # Set to your Vercel URL (e.g. https://your-app.vercel.app) after frontend deployment
+      - key: GROQ_API_KEY
+        sync: false        # Paste your Groq API key in Render dashboard
+      - key: GROQ_BASE_URL
+        value: https://api.groq.com/openai/v1
+      - key: GROQ_MODEL
+        value: openai/gpt-oss-120b
+      - key: HF_API_TOKEN
+        sync: false        # Paste your HuggingFace token in Render dashboard
+      - key: HF_DIAGNOSIS_MODEL
+        value: emilyalsentzer/Bio_ClinicalBERT
+      - key: CLOUDINARY_CLOUD_NAME
+        sync: false
+      - key: CLOUDINARY_API_KEY
+        sync: false
+      - key: CLOUDINARY_API_SECRET
+        sync: false
+
+  # ─── 2. Python FastAPI Ambient Scribe ─────────────────────────────────────
+  - type: web
+    name: medibridge-scribe
+    env: python
+    plan: free
+    rootDir: services/scribe
+    buildCommand: pip install -r requirements.txt
+    startCommand: python app.py serve
+    envVars:
+      - key: HOST
+        value: 0.0.0.0
+      - key: GROQ_API_KEY
+        sync: false        # Paste your Groq API key in Render dashboard
+      - key: ASR_PROVIDER
+        value: openai_compatible
+      - key: PYTHONIOENCODING
+        value: utf-8
